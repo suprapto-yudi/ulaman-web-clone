@@ -43,7 +43,7 @@ export default function CustomHamburger({ onClick, isOpen, barColor }: CustomHam
     <button
       onClick={onClick}
       aria-label="Toggle Menu"
-      className="p-1" // Tambahkan padding agar area klik lebih nyaman
+      className="p-1 group"
     >
       {/* Jika menu terbuka, tampilkan ikon X yang sudah kita gunakan di overlay */}
       {isOpen ? (

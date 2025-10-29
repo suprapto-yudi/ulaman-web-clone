@@ -41,10 +41,10 @@ export default function IntroSection() {
             
             {/* Headline/Judul */}
             <motion.h2 
-              variants={itemVariants}
-              className="font-serif text-3xl md:text-4xl text-foreground leading-tight"
+                variants={itemVariants}
+                className="font-serif text-3xl md:text-4xl text-primary leading-tight" 
             >
-              {introData.heading}
+                {introData.heading}
             </motion.h2>
 
             {/* Paragraf 1 */}

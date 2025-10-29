@@ -1,37 +1,25 @@
-import Link from 'next/link'
+// src/components/ui/HoverLink.tsx
+import Link from 'next/link';
+import React from 'react';
 
 type HoverLinkProps = {
-  href: string
-  children: React.ReactNode
-  className?: string
-}
+    href: string;
+    children: React.ReactNode;
+};
 
-export default function HoverLink({
-  href,
-  children,
-  className = '',
-}: HoverLinkProps) {
-  // Base classes untuk link di body (warna primary/gold)
-  const baseClasses =
-    'relative text-primary uppercase text-sm tracking-widest'
-  
-  // Animasi underline (kiri-ke-kanan)
-  const afterClasses = `
-    after:content-[''] after:absolute after:bottom-[-4px] after:left-0 
-    after:h-[1px] after:w-full after:bg-primary 
-    after:transition-transform after:duration-300 after:ease-in-out
-    after:origin-left after:scale-x-0 
-    hover:after:origin-right hover:after:scale-x-100
-  `
-
-  return (
-    <Link
-      href={href}
-      target={href.startsWith('http') ? '_blank' : '_self'}
-      rel="noopener noreferrer"
-      className={`${baseClasses} ${afterClasses} ${className}`}
-    >
-      {children}
-    </Link>
-  )
+export default function HoverLink({ href, children }: HoverLinkProps) {
+    return (
+        <Link 
+            href={href} 
+            // Styling untuk link di Rooms Section
+            className="font-sans text-sm uppercase tracking-widest text-primary relative group pt-1"
+        >
+            {children}
+            {/* Garis Bawah */}
+            <span
+                className="block absolute bottom-0 left-0 h-px w-0 bg-primary 
+                           transition-all duration-300 group-hover:w-full"
+            />
+        </Link>
+    );
 }

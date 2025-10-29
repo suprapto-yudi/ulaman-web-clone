@@ -8,9 +8,9 @@ import { motion, type Variants, AnimatePresence } from 'framer-motion'
 import { X } from 'lucide-react' 
 
 // Impor komponen kustom kita
-import CustomHamburger from '@/components/ui/CustomHamburger' // Wajib ada
-import NavLink from '@/components/ui/NavLink' // Wajib ada
-import StayWithUsButton from '@/components/ui/StayWithUsButton' // Wajib ada
+import CustomHamburger from '@/components/ui/CustomHamburger' 
+import NavLink from '@/components/ui/NavLink' 
+import StayWithUsButton from '@/components/ui/StayWithUsButton' 
 
 // Varian animasi untuk container
 const navbarVariants: Variants = { 
@@ -34,7 +34,7 @@ const itemVariants: Variants = {
   },
 }
 
-// Data Links (Dipersingkat untuk contoh)
+// Data Links 
 const navLinks = [
   { href: 'https://ulamanbali.com/rooms/', label: 'Villas', external: false },
   { href: 'https://riversidespabyulaman.com/', label: 'Spa', external: true },
@@ -49,7 +49,8 @@ export default function Navbar() {
   // KUNCI: useEffect untuk mendengarkan event scroll
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10)
+      // Set state true jika scroll vertikal melebihi 10px
+      setIsScrolled(window.scrollY > 10) 
     }
 
     window.addEventListener('scroll', handleScroll)
@@ -62,8 +63,13 @@ export default function Navbar() {
     setIsMobileMenuOpen(!isMobileMenuOpen)
   }
 
-  // KUNCI: Variabel dinamis untuk warna bar
-  const barColorClass = isScrolled ? 'bg-foreground' : 'bg-white';
+  // KUNCI: Variabel dinamis untuk warna bar & teks saat SCROLL
+  const defaultBarColor = 'bg-white';
+  const scrolledBarColor = 'bg-primary';
+  const barColorClass = isScrolled ? scrolledBarColor : defaultBarColor;
+  
+  // Warna Teks saat SCROLL
+  const linkTextColorClass = isScrolled ? 'text-primary' : 'text-white';
 
   return (
     <>
@@ -75,11 +81,10 @@ export default function Navbar() {
         initial="hidden"
         animate="visible"
       >
-        {/* Kontainer Navigasi Utama: W-full, tanpa max-width */}
+        {/* Kontainer Navigasi Utama: W-full */}
         <nav className="w-full h-20 relative"> 
           
           {/* Kontainer Flex Internal: Mengatur 3-kolom dan memberi padding horizontal */}
-          {/* Kunci Mentok Tepi: max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 */}
           <div className="flex justify-between items-center h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> 
 
             {/* SISI KIRI: Tombol Menu & Links Navigasi Desktop */}
@@ -87,11 +92,11 @@ export default function Navbar() {
               className="flex-1 flex justify-start items-center space-x-6" 
               variants={itemVariants}
             >
-              {/* KUNCI INTEGRASI: CustomHamburger */}
+              {/* CustomHamburger */}
               <CustomHamburger 
                 onClick={toggleMobileMenu} 
                 isOpen={isMobileMenuOpen} 
-                barColor={barColorClass} 
+                barColor={barColorClass} // Mengirimkan warna baru
               />
               
               {/* Navigasi Desktop Links */}
@@ -101,8 +106,8 @@ export default function Navbar() {
                         key={link.href} 
                         href={link.href} 
                         external={link.external} 
-                        // KUNCI: Style dinamis
-                        className={isScrolled ? 'text-foreground hover:text-primary' : 'text-white hover:text-primary'}
+                        // KUNCI: Style dinamis (text-primary saat scroll)
+                        className={`${linkTextColorClass} hover:text-primary`}
                     >
                         {link.label}
                     </NavLink>
@@ -112,7 +117,10 @@ export default function Navbar() {
 
             {/* SISI TENGAH: Logo (Selalu Muncul di Tengah Flex Container) */}
             <motion.div 
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300"
+              // Positioning: absolute top/left/transform
+              className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-300
+                // KUNCI SCALE: Default 100%, Scrolled 70%
+                ${isScrolled ? 'scale-70' : 'scale-100'}`} 
               variants={itemVariants}
             >
                 <Link 
@@ -120,14 +128,16 @@ export default function Navbar() {
                     onClick={() => window.location.href = 'https://ulamanbali.com'} 
                 >
                     <Image 
-                        src="/images/ulaman-logo-small.svg" // Pastikan nama file ini benar
+                        src="/images/ulaman-logo-small.svg" 
                         alt="Ulaman Logo"
-                        width={100}
+                        // Wajib: Definisikan ukuran dasar
+                        width={100} 
                         height={30}
                         priority
-                        // Filter Invert tetap ada untuk menyesuaikan warna saat scroll
                         className={`transition-all duration-300 ${
-                            isScrolled ? 'filter-none' : 'invert'
+                            // Logo berwarna PRIMARY (filter-none) saat di-scroll
+                            // Logo default di Hero (invert) harus menggunakan warna putih
+                            isScrolled ? 'filter-none' : 'filter-none' 
                         }`}
                     />
                 </Link>
@@ -139,7 +149,6 @@ export default function Navbar() {
               className="flex-1 flex justify-end"
               variants={itemVariants}
             >
-              {/* KUNCI INTEGRASI: StayWithUsButton */}
               <StayWithUsButton 
                 isScrolled={isScrolled} 
               />
@@ -149,7 +158,7 @@ export default function Navbar() {
         </nav>
       </motion.header>
 
-      {/* MOBILE MENU OVERLAY (Disarankan menggunakan komponen terpisah) */}
+      {/* MOBILE MENU OVERLAY (Sudah direvisi ke layout grid) */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
@@ -157,7 +166,7 @@ export default function Navbar() {
             animate={{ x: 0 }}
             exit={{ x: '100vw' }}
             transition={{ duration: 0.4 }}
-            className="fixed inset-0 z-100 bg-background"
+            className="fixed inset-0 z-[100] bg-background"
           >
             {/* Header Close Button */}
             <div className="flex justify-end items-center h-20 px-4 sm:px-6">
@@ -170,22 +179,31 @@ export default function Navbar() {
               </button>
             </div>
             
-            {/* Konten Menu Utama (Sesuai Struktur Gambar 5271d3.jpg) */}
-            <nav className="flex flex-col items-center justify-start py-12 px-4 h-[calc(100vh-80px)]">
-                <div className="text-center font-serif text-3xl md:text-5xl text-primary leading-snug">
-                    <p>Home / Villas / Packages</p>
-                    <p>/ Spa / Retreats / Dine</p>
-                    <p>Experiences</p>
+            {/* Konten Menu Utama (Grid Teks Besar) */}
+            <nav className="flex flex-col items-center justify-center h-[calc(100vh-80px)] px-4 sm:px-6 lg:px-8">
+                
+                <div className="grid grid-cols-2 gap-x-16 gap-y-4 font-serif text-3xl md:text-5xl text-primary leading-snug">
+                    <div className="flex flex-col gap-2 text-right">
+                        <Link onClick={toggleMobileMenu} href="/"><span className="hover:text-foreground transition-colors">Home</span></Link>
+                        <Link onClick={toggleMobileMenu} href="/rooms"><span className="hover:text-foreground transition-colors">Villas / Packages</span></Link>
+                        <Link onClick={toggleMobileMenu} href="https://riversidespabyulaman.com/"><span className="hover:text-foreground transition-colors">Spa / Retreats</span></Link>
+                        <Link onClick={toggleMobileMenu} href="https://earthbyulaman.com/"><span className="hover:text-foreground transition-colors">Dine / Experiences</span></Link>
+                    </div>
+                    <div className="flex flex-col gap-2 text-left">
+                        <Link onClick={toggleMobileMenu} href="/facilities"><span className="hover:text-foreground transition-colors">Facilities / Blog</span></Link>
+                        <Link onClick={toggleMobileMenu} href="/reviews"><span className="hover:text-foreground transition-colors">Reviews / About</span></Link>
+                        <Link onClick={toggleMobileMenu} href="/contact"><span className="hover:text-foreground transition-colors">Contact / The Map</span></Link>
+                    </div>
                 </div>
                 
-                <div className="mt-auto pb-8 flex flex-col items-center">
+                <div className="mt-12 flex flex-col items-center">
                     <StayWithUsButton 
                         isScrolled={true} 
-                        onClick={toggleMobileMenu} // Menutup menu setelah klik
+                        onClick={toggleMobileMenu}
+                        className="px-10 py-4 text-xl" 
                     />
-                    <p className="font-sans text-xs text-foreground/60 mt-8">
-                        Whatsapp / Directions / TripAdvisor
-                        <br/>/ Instagram / Facebook
+                    <p className="font-sans text-xs text-foreground/60 mt-8 text-center">
+                        Whatsapp / Directions / TripAdvisor / Instagram / Facebook
                     </p>
                 </div>
             </nav>

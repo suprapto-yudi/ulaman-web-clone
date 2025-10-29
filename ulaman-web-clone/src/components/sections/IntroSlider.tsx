@@ -42,7 +42,7 @@ export default function IntroSlider() {
   }, [emblaApi])
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full group">
       {/* Viewport Slider */}
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex">
@@ -54,7 +54,8 @@ export default function IntroSlider() {
                 width={800}
                 height={900}
                 // Border radius asimetris dari Detail 2!
-                className="w-full h-auto object-cover aspect-[4/5] rounded-asymmetric"
+                className="w-full h-auto object-cover aspect-[4/5] rounded-asymmetric" 
+                priority={index === 0}
               />
             </div>
           ))}
@@ -62,33 +63,39 @@ export default function IntroSlider() {
       </div>
 
       {/* Tombol Navigasi Kustom (sesuai Detail 2) */}
-      <div className="absolute bottom-6 left-6 flex gap-2">
-        <button
-          onClick={scrollPrev}
-          className="h-12 w-12 bg-white/80 hover:bg-white transition-colors
-                     flex items-center justify-center rounded-asymmetric"
-          aria-label="Previous Slide"
-        >
-          <ArrowLeft className="h-5 w-5 text-foreground" />
-        </button>
-        <button
-          onClick={scrollNext}
-          className="h-12 w-12 bg-white/80 hover:bg-white transition-colors
-                     flex items-center justify-center rounded-asymmetric"
-          aria-label="Next Slide"
-        >
-          <ArrowRight className="h-5 w-5 text-foreground" />
-        </button>
+      {/* KUNCI: Posisi panah kiri dan kanan di tepi gambar & muncul saat hover */}
+      <div className="absolute inset-0 flex items-center justify-between pointer-events-none p-6">
+          {/* Panah Kiri */}
+          <button
+            onClick={scrollPrev}
+            className="h-12 w-12 bg-white/80 hover:bg-white transition-colors
+                      flex items-center justify-center rounded-asymmetric 
+                      pointer-events-auto opacity-0 group-hover:opacity-100 transition-opacity" // KUNCI: Animasi muncul saat hover
+            aria-label="Previous Slide"
+          >
+            <ArrowLeft className="h-5 w-5 text-foreground" />
+          </button>
+          {/* Panah Kanan */}
+          <button
+            onClick={scrollNext}
+            className="h-12 w-12 bg-white/80 hover:bg-white transition-colors
+                      flex items-center justify-center rounded-asymmetric
+                      pointer-events-auto opacity-0 group-hover:opacity-100 transition-opacity" // KUNCI: Animasi muncul saat hover
+            aria-label="Next Slide"
+          >
+            <ArrowRight className="h-5 w-5 text-foreground" />
+          </button>
       </div>
 
       {/* Paginasi Dots (sesuai Detail 2) */}
-      <div className="absolute bottom-6 right-6 flex gap-2">
+      {/* KUNCI: Posisikan Dots di tengah bawah (bukan di kanan) */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2"> 
         {slides.map((_, index) => (
           <button
             key={index}
             onClick={() => scrollTo(index)}
-            className={`h-3 w-3 rounded-full transition-all
-              ${index === selectedIndex ? 'bg-white' : 'bg-white/40'}
+            className={`h-3 w-3 rounded-full transition-all border border-white
+              ${index === selectedIndex ? 'bg-white' : 'bg-transparent'} // KUNCI: Bullet tidak terisi warna
             `}
             aria-label={`Go to slide ${index + 1}`}
           />

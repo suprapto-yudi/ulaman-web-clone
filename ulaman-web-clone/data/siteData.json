@@ -9,19 +9,45 @@
   "rooms": [
     {
       "id": 1,
-      "name": "Bamboo Villa",
-      "subtitle": "Riverside Hideaway",
-      "price": "IDR 4,000,000/night",
-      "imageUrl": "/images/rooms/room-bamboo-villa.jpg",
-      "detailsHref": "/rooms/bamboo-villa"
+      "name": "Floating Lake",
+      "subtitle": "A luxurious floating villa on Ulaman's bio-filtered lake.",
+      "imageUrl": "/images/rooms/room-floating-lake.jpg",
+      "detailsHref": "/rooms/floating-lake"
     },
     {
       "id": 2,
-      "name": "The Cocoon",
-      "subtitle": "Unique Architecture",
-      "price": "IDR 5,500,000/night",
-      "imageUrl": "/images/rooms/room-cocoon.jpg",
-      "detailsHref": "/rooms/the-cocoon"
+      "name": "Cocoon Jungle",
+      "subtitle": "Indulge in an unparalleled blend of exotic elegance and coziness.",
+      "imageUrl": "/images/rooms/room-cocoon-jungle.jpg",
+      "detailsHref": "/rooms/cocoon-jungle"
+    },
+    {
+      "id": 3,
+      "name": "Avatar Tree House",
+      "subtitle": "Experience luxury in an avatar-inspired sky villa with 180° views.",
+      "imageUrl": "/images/rooms/room-avatar-tree-house.jpg",
+      "detailsHref": "/rooms/avatar-tree-house"
+    },
+    {
+      "id": 4,
+      "name": "Grand Lagoon Private Pool",
+      "subtitle": "Indulge in an exclusive riverside villa with jungle lagoon view.",
+      "imageUrl": "/images/rooms/room-grand-lagoon-private-pool.jpg",
+      "detailsHref": "/rooms/grand-lagoon-private-pool"
+    },
+    {
+      "id": 5,
+      "name": "Jungle Garden Pool",
+      "subtitle": "An ultimate private pool retreat at Ulaman.",
+      "imageUrl": "/images/rooms/room-jungle-garden-pool.jpg",
+      "detailsHref": "/rooms/jungle-garden-pool"
+    },
+    {
+      "id": 6,
+      "name": "Ulin Poolside",
+      "subtitle": "A luxurious jungle ground-floor oasis with direct access to the infinity pool.",
+      "imageUrl": "/images/rooms/room-ulin-poolside.jpg",
+      "detailsHref": "/rooms/ulin-poolside"
     }
   ],
   "facilities": [
