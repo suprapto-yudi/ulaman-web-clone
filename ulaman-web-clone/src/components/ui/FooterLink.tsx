@@ -1,4 +1,8 @@
+// src/components/ui/FooterLink.tsx
 import Link from 'next/link'
+import React from 'react';
+// Wajib import twMerge untuk menggabungkan class dengan aman
+import { twMerge } from 'tailwind-merge';
 
 type FooterLinkProps = {
   href: string
@@ -11,27 +15,33 @@ export default function FooterLink({
   children,
   className = '',
 }: FooterLinkProps) {
-  // Base classes untuk link di footer (warna teks beda)
-  const baseClasses =
-    'relative text-white/70 hover:text-white transition-colors duration-300'
+  // Logika external link (untuk target dan rel)
+  const isExternal = href.startsWith('http') || href.startsWith('https');
+
+  // Base classes untuk link di footer (text-white/70)
+  const baseClasses = 
+    'text-white/70 text-sm tracking-wide hover:text-white transition-colors duration-300 relative group'
   
-  // Animasi underline (kiri-ke-kanan)
-  const afterClasses = `
-    after:content-[''] after:absolute after:bottom-[-4px] after:left-0 
+  // Kelas untuk pseudoelemen ::after (Underline)
+  const underlineClasses = `
+    after:content-[''] after:absolute after:bottom-[-2px] after:left-0 
     after:h-[1px] after:w-full after:bg-primary 
-    after:transition-transform after:duration-300 after:ease-in-out
+    after:transition-transform after:duration-300 after:ease-out
     after:origin-left after:scale-x-0 
-    hover:after:origin-right hover:after:scale-x-100
+    group-hover:after:scale-x-100
   `
+  // Menggabungkan semua class
+  const finalClasses = twMerge(baseClasses, underlineClasses, className);
 
   return (
     <Link
       href={href}
-      target={href.startsWith('http') ? '_blank' : '_self'}
-      rel="noopener noreferrer"
-      className={`${baseClasses} ${afterClasses} ${className}`}
+      // Terapkan target dan rel hanya jika isExternal adalah true
+      target={isExternal ? '_blank' : '_self'}
+      rel={isExternal ? 'noopener noreferrer' : undefined} 
+      className={finalClasses}
     >
       {children}
     </Link>
-  )
+  );
 }

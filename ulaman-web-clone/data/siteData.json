@@ -1,0 +1,74 @@
+{
+  "intro": {
+    "heading": "Experience A Blend of Nature, Comfort, and Luxury",
+    "paragraph1": "Nestled among the rice fields and coconut trees of Tabanan, Ulaman is only 20 minutes away from the vibrant town of Canggu.",
+    "paragraph2": "An award-winning eco-luxury resort offering a unique hideaway experience. Embrace authenticity, balance, and harmony with nature in a healing, luxurious environment.",
+    "buttonText": "Discover More",
+    "buttonHref": "/about"
+  },
+  "rooms": [
+    {
+      "id": 1,
+      "name": "Bamboo Villa",
+      "subtitle": "Riverside Hideaway",
+      "price": "IDR 4,000,000/night",
+      "imageUrl": "/images/rooms/room-bamboo-villa.jpg",
+      "detailsHref": "/rooms/bamboo-villa"
+    },
+    {
+      "id": 2,
+      "name": "The Cocoon",
+      "subtitle": "Unique Architecture",
+      "price": "IDR 5,500,000/night",
+      "imageUrl": "/images/rooms/room-cocoon.jpg",
+      "detailsHref": "/rooms/the-cocoon"
+    }
+  ],
+  "facilities": [
+    {
+      "id": 1,
+      "icon": "Waves",
+      "name": "Holistic Spa",
+      "description": "Rejuvenate your body and soul with our world-class holistic spa treatments."
+    },
+    {
+      "id": 2,
+      "icon": "UtensilsCrossed",
+      "name": "Organic Restaurant",
+      "description": "Dine on fresh, locally-sourced, and organic farm-to-table cuisine."
+    },
+    {
+      "id": 3,
+      "icon": "PersonStanding",
+      "name": "Yoga Shala",
+      "description": "Find your center at our breathtaking bamboo yoga shala overlooking the river."
+    },
+    {
+      "id": 4,
+      "icon": "Dumbbell",
+      "name": "Jungle Gym",
+      "description": "Stay active in our unique fitness center equipped with state-of-the-art machines."
+    },
+    {
+      "id": 5,
+      "icon": "Wifi",
+      "name": "High-Speed Wi-Fi",
+      "description": "Stay connected with complimentary high-speed internet across the entire resort."
+    },
+    {
+      "id": 6,
+      "icon": "ParkingCircle",
+      "name": "Complimentary Parking",
+      "description": "Enjoy peace of mind with our secure and complimentary on-site parking."
+    }
+  ],
+  "experiences": [
+    {
+      "id": 1,
+      "name": "Riverstone Spa",
+      "tag": "Health",
+      "imageUrl": "/images/experiences/experience-spa.jpg",
+      "linkHref": "/experiences/spa"
+    }
+  ]
+}
