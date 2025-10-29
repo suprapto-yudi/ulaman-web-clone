@@ -1,4 +1,6 @@
 // src/components/sections/HeroSection.tsx
+// KUNCI PERBAIKAN: TAMBAHKAN INI DI BARIS PERTAMA
+"use client"
 
 import { motion } from 'framer-motion'
 // Kita tidak perlu Image karena poster sudah menghandle fallback

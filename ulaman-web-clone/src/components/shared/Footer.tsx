@@ -1,3 +1,8 @@
+// src/components/shared/Footer.tsx
+
+// KUNCI PERBAIKAN: TAMBAHKAN INI DI BARIS PERTAMA
+"use client"
+
 import Link from 'next/link'
 import FooterLink from '@/components/ui/FooterLink'
 import AwardsCarousel from '@/components/ui/AwardsCarousel'
