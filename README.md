@@ -1,1 +1,0 @@
-# ulaman-web-clone
