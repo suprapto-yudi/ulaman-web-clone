@@ -11,7 +11,6 @@ type VideoModalProps = {
 }
 
 export default function VideoModal({ isOpen, onClose, videoUrl }: VideoModalProps) {
-  // Ubah link YouTube biasa (watch?v=) menjadi link embed
   const embedUrl = videoUrl.replace("watch?v=", "embed/");
 
   return (
