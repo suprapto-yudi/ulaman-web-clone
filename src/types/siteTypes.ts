@@ -9,6 +9,14 @@ export interface HotspotData {
   top: string;
 }
 
+// Tambahkan di file tipe Anda (src/types/siteTypes.ts)
+export interface HotspotProps {
+  name: string;
+  icon: React.ReactNode; // Tipe untuk ikon JSX
+  top: string;         // Tipe untuk koordinat top (mis. "10%")
+  left: string;        // Tipe untuk koordinat left (mis. "35%")
+}
+
 // --- Interfaces untuk Bagian Lain ---
 
 export interface IntroData {

@@ -1,22 +1,26 @@
 "use client" // Perlu "use client" untuk me-render Hotspot.tsx
 
 import Image from 'next/image'
-import { motion } from 'framer-motion'
-import data from '@/data/siteData.json'
+import { motion, Variants } from 'framer-motion'
+import data from '../../../data/siteData.json'
 import Hotspot from '@/components/ui/Hotspot'
+import { SiteData, HotspotData } from '@/types/siteTypes';
 
 // Impor ikon dari lucide-react (sesuai data/siteData.json)
 import { 
-  Wind, 
-  Utensils, 
-  Waves, 
-  Dumbbell, 
-  Sparkles, 
-  Home 
+  Home, Gift, Bell, Dumbbell, Utensils, Hotel, User, Martini, Droplet,
+  // Nama yang sering berbeda/spesial:
+  Sailboat, // Ganti Boat
+  Waves,    // Ganti Ripples & Pool (jika tidak ada)
+  Trees,    // Ganti TreeDeciduous
+  HeartHandshake, // Ganti Massage
+  Goal,     // Ganti Racket (atau pakai yang lain)
+  Flower,   // Ganti Lotus (jika tidak ada Lotus)
+  Zap,      // Ganti Waterfall (jika tidak ada)
 } from 'lucide-react'
 
 // Varian animasi (fade in dari bawah)
-const fadeInUp = {
+const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
@@ -30,12 +34,23 @@ const fadeInUp = {
 
 // "Kamus" untuk memetakan nama ikon (string) ke komponen ikon (JSX)
 const iconMap: { [key: string]: React.ReactNode } = {
-  Wind: <Wind size={20} />,
-  Utensils: <Utensils size={20} />,
-  Waves: <Waves size={20} />,
-  Dumbbell: <Dumbbell size={20} />,
-  Sparkles: <Sparkles size={20} />,
   Home: <Home size={20} />,
+  Racket: <Goal size={20} />,
+  "Shopping Bag": <Gift size={20} />,
+  Bell: <Bell size={20} />,
+  Dumbbell: <Dumbbell size={20} />,
+  "Tree Deciduous": <Trees size={20} />,
+  Boat: <Sailboat size={20} />,
+  Utensils: <Utensils size={20} />,
+  Pool: <Waves size={20} />,
+  Hotel: <Hotel size={20} />,
+  Massage: <HeartHandshake size={20} />,
+  User: <User size={20} />,
+  Waterfall: <Zap size={20} />,
+  Ripples: <Waves size={20} />,
+  Martini: <Martini size={20} />,
+  Droplet: <Droplet size={20} />,
+  Lotus: <Flower size={20} />,
 }
 
 export default function MapSection() {
@@ -74,20 +89,20 @@ export default function MapSection() {
         >
           {/* Gambar Peta Latar Belakang */}
           <Image
-            src="/images/map/map-background.jpg"
+            src="/images/map/ulaman-map.jpg"
             alt="Ulaman Bali Map"
             fill
             className="object-contain"
           />
 
           {/* Render semua Hotspot */}
-          {map.hotspots.map((hotspot) => (
+          {map.hotspots.map((hotspot: HotspotData) => (
             <Hotspot
               key={hotspot.id}
               name={hotspot.name}
               icon={iconMap[hotspot.iconName] || <Home size={20} />} // Ambil ikon dari kamus
-              posY={hotspot.posY}
-              posX={hotspot.posX}
+              top={hotspot.top} 
+              left={hotspot.left}
             />
           ))}
         </motion.div>

@@ -1,24 +1,25 @@
 "use client"
 
-import { useState } from 'react'
+import React, { useState } from 'react'; // Impor React dan useState
+import { HotspotProps } from '@/types/siteTypes'; // <-- Hanya Impor Tipe yang sudah didefinisikan
 import { motion, AnimatePresence } from 'framer-motion'
 
-// Tentukan tipe props
-type HotspotProps = {
-  name: string
-  icon: React.ReactNode // Kita terima icon sebagai JSX
-  posY: string
-  posX: string
-}
-
-export default function Hotspot({ name, icon, posY, posX }: HotspotProps) {
+export default function Hotspot({ name, icon, top, left }: HotspotProps) {
   const [isHovered, setIsHovered] = useState(false)
+  const hotspotStyle: React.CSSProperties = {
+    top: top,
+    left: left,
+    // Ini PENTING untuk memposisikan titik tengah ikon tepat di koordinat (top, left)
+    transform: 'translate(-50%, -50%)', 
+  };
 
   return (
     // Wrapper hotspot, diposisikan secara absolut
     <div
-      className="absolute z-10"
-      style={{ top: posY, left: posX }}
+      className="absolute flex items-center justify-center cursor-pointer 
+                 transition-all duration-300 hover:scale-110 group z-10" // Tambahkan z-index agar di atas gambar
+      style={hotspotStyle}
+      title={name}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
