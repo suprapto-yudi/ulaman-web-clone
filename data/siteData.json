@@ -138,42 +138,150 @@
       "alt": "Interior of Ulaman's E.A.R.T.H restaurant"
     }
   ],
-  "facilities": [
-    {
-      "id": 1,
-      "icon": "Waves",
-      "name": "Holistic Spa",
-      "description": "Rejuvenate your body and soul with our world-class holistic spa treatments."
-    },
-    {
-      "id": 2,
-      "icon": "UtensilsCrossed",
-      "name": "Organic Restaurant",
-      "description": "Dine on fresh, locally-sourced, and organic farm-to-table cuisine."
-    },
-    {
-      "id": 3,
-      "icon": "PersonStanding",
-      "name": "Yoga Shala",
-      "description": "Find your center at our breathtaking bamboo yoga shala overlooking the river."
-    },
-    {
-      "id": 4,
-      "icon": "Dumbbell",
-      "name": "Jungle Gym",
-      "description": "Stay active in our unique fitness center equipped with state-of-the-art machines."
-    },
-    {
-      "id": 5,
-      "icon": "Wifi",
-      "name": "High-Speed Wi-Fi",
-      "description": "Stay connected with complimentary high-speed internet across the entire resort."
-    },
-    {
-      "id": 6,
-      "icon": "ParkingCircle",
-      "name": "Complimentary Parking",
-      "description": "Enjoy peace of mind with our secure and complimentary on-site parking."
-    }
-  ]
+  "map": {
+    "headline": "Discover Ulaman From Above",
+    "subheadline": "Tap on an icon,",
+    "hotspots": [
+      {
+        "id": 1,
+        "name": "Tennis Court",
+        "iconName": "Racket",
+        "left": "85.5%",
+        "top": "11.0%"
+      },
+      {
+        "id": 2,
+        "name": "Gift Shop",
+        "iconName": "Shopping Bag",
+        "left": "89.0%",
+        "top": "22.5%"
+      },
+      {
+        "id": 3,
+        "name": "Reception",
+        "iconName": "Bell",
+        "left": "88.0%",
+        "top": "20.5%"
+      },
+      {
+        "id": 4,
+        "name": "Gym",
+        "iconName": "Dumbbell",
+        "left": "82.5%",
+        "top": "15.0%"
+      },
+      {
+        "id": 5,
+        "name": "Avatar Tree House",
+        "iconName": "Tree Deciduous",
+        "left": "44.5%",
+        "top": "23.5%"
+      },
+      {
+        "id": 6,
+        "name": "Floating Lake",
+        "iconName": "Boat",
+        "left": "28.0%",
+        "top": "16.0%"
+      },
+      {
+        "id": 7,
+        "name": "E.A.R.T.H Restaurant",
+        "iconName": "Utensils",
+        "left": "55.5%",
+        "top": "41.5%"
+      },
+      {
+        "id": 8,
+        "name": "Waterfall Infinity Pool",
+        "iconName": "Pool",
+        "left": "69.5%",
+        "top": "50.0%"
+      },
+      {
+        "id": 9,
+        "name": "Grand Lagoon Villa with Pool",
+        "iconName": "Hotel",
+        "left": "10.0%",
+        "top": "70.0%"
+      },
+      {
+        "id": 10,
+        "name": "Riverside Spa",
+        "iconName": "Massage",
+        "left": "50.0%",
+        "top": "40.0%"
+      },
+      {
+        "id": 11,
+        "name": "Tree House",
+        "iconName": "Tree Deciduous",
+        "left": "62.0%",
+        "top": "29.0%"
+      },
+      {
+        "id": 12,
+        "name": "Ulin Poolside",
+        "iconName": "Pool",
+        "left": "22.5%",
+        "top": "64.0%"
+      },
+      {
+        "id": 13,
+        "name": "Waterfall & Waterfall Deck",
+        "iconName": "Waterfall",
+        "left": "45.0%",
+        "top": "53.5%"
+      },
+      {
+        "id": 14,
+        "name": "Cliffside Yoga Shala",
+        "iconName": "User",
+        "left": "55.0%",
+        "top": "25.0%"
+      },
+      {
+        "id": 15,
+        "name": "E.A.R.T.H Lounge Pool",
+        "iconName": "Pool",
+        "left": "69.0%",
+        "top": "44.5%"
+      },
+      {
+        "id": 16,
+        "name": "Cocoon Jungle",
+        "iconName": "Bed",
+        "left": "80.5%",
+        "top": "56.0%"
+      },
+      {
+        "id": 17,
+        "name": "E.A.R.T.H Lounge & Bar",
+        "iconName": "Martini",
+        "left": "60.5%",
+        "top": "32.0%"
+      },
+      {
+        "id": 18,
+        "name": "Jungle Garden Pool",
+        "iconName": "Droplet",
+        "left": "20.0%",
+        "top": "44.5%"
+      },
+      {
+        "id": 19,
+        "name": "Mandala Yoga Shala",
+        "iconName": "Lotus",
+        "left": "38.5%",
+        "top": "37.5%"
+      },
+      {
+        "id": 20,
+        "name": "Ulaman Hall",
+        "iconName": "Home",
+        "left": "35.0%",
+        "top": "25.0%"
+      }
+    ]
+  }
 }
