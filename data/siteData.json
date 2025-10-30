@@ -51,63 +51,76 @@
     }
   ],
   "packages": [
-  {
-    "id": 1, 
-    "slug": "avatar-experience",
-    "name": "The Avatar Experience",
-    "tag": "Adventure", 
-    "tagline": "3 Days / 2 Nights",
-    "cardImageUrl": "/images/packages/package-avatar.jpg",
-    "modalImageUrl": "/images/packages/package-avatar-detail.jpg",
-    "price": "IDR 16,000,000++ / Package",
-    "details": {
-      "left": [
-        "3D2N stay at Avatar Tree House or Floating Lake",
-        "Nature Trekking or Village Tour for Couple",
-        "Daily Breakfast",
-        "Usage of Bath Bar in Room",
-        "Ulaman Exclusive Gift Bag",
-        "Welcome Drink Upon Arrival"
-      ],
-      "right": [
-        "Courses Chef's Special Selection Lunch or Dinner for Couple",
-        "Airport Pick-Up",
-        "Daily Resort Activities",
-        "Free Minibar in Room",
-        "Ulaman Chocolate Dates"
-      ]
+    {
+      "id": 1, 
+      "slug": "avatar-experience",
+      "name": "The Avatar Experience",
+      "tag": "Adventure", 
+      "tagline": "3 Days / 2 Nights",
+      "cardImageUrl": "/images/packages/package-avatar.jpg",
+      "modalImageUrl": "/images/packages/package-avatar-detail.jpg",
+      "price": "IDR 16,000,000++ / Package",
+      "details": {
+        "left": [
+          "3D2N stay at Avatar Tree House or Floating Lake",
+          "Nature Trekking or Village Tour for Couple",
+          "Daily Breakfast",
+          "Usage of Bath Bar in Room",
+          "Ulaman Exclusive Gift Bag",
+          "Welcome Drink Upon Arrival"
+        ],
+        "right": [
+          "Courses Chef's Special Selection Lunch or Dinner for Couple",
+          "Airport Pick-Up",
+          "Daily Resort Activities",
+          "Free Minibar in Room",
+          "Ulaman Chocolate Dates"
+        ]
+      }
+    },
+    {
+      "id": 2, 
+      "slug": "ultimate-honeymoon",
+      "name": "The Ultimate Honeymoon",
+      "tag": "Romance", 
+      "tagline": "3 Days / 2 Nights",
+      "cardImageUrl": "/images/packages/package-honeymoon.jpg",
+      "modalImageUrl": "/images/packages/package-honeymoon-detail.jpg",
+      "price": "IDR 15,750,000++ / Package",
+      "details": {
+        "left": [
+          "3D2N stay at Jungle Garden Pool Villa",
+          "60-Minute Balinese Massage for Couple",
+          "Floating Breakfast in Pool Villa",
+          "Airport Pick-Up",
+          "Free Minibar in Room",
+          "Ulaman Exclusive Gift Bag",
+          "Welcome Drink Upon Arrival"
+        ],
+        "right": [
+          "Romantic Dinner with a Glass of Wine / Cocktail",
+          "Flower Bath",
+          "Honeymoon Bed Decoration & Welcome Cake",
+          "Daily Breakfast",
+          "Daily Resort Activities",
+          "Ulaman Chocolate Dates"
+        ]
+      }
     }
+  ],
+  "wellness": {
+    "headline": "Discover your path to wellness and growth.",
+    "text": "At Ulaman we redefine luxury as an experience that not only pampers the senses but also nurtures the soul. Nestled in pristine nature, our eco-luxury retreat offers a sanctuary for healing and transformation. With specialized programs year-round, enjoy dedicated attention and care, immersing yourself in rejuvenation, or profound inner change through meticulously curated activities and treatments. Your transformative journey begins here.",
+    "link": "/wellness-placeholder"
   },
-  {
-    "id": 2, 
-    "slug": "ultimate-honeymoon",
-    "name": "The Ultimate Honeymoon",
-    "tag": "Romance", 
-    "tagline": "3 Days / 2 Nights",
-    "cardImageUrl": "/images/packages/package-honeymoon.jpg",
-    "modalImageUrl": "/images/packages/package-honeymoon-detail.jpg",
-    "price": "IDR 15,750,000++ / Package",
-    "details": {
-      "left": [
-        "3D2N stay at Jungle Garden Pool Villa",
-        "60-Minute Balinese Massage for Couple",
-        "Floating Breakfast in Pool Villa",
-        "Airport Pick-Up",
-        "Free Minibar in Room",
-        "Ulaman Exclusive Gift Bag",
-        "Welcome Drink Upon Arrival"
-      ],
-      "right": [
-        "Romantic Dinner with a Glass of Wine / Cocktail",
-        "Flower Bath",
-        "Honeymoon Bed Decoration & Welcome Cake",
-        "Daily Breakfast",
-        "Daily Resort Activities",
-        "Ulaman Chocolate Dates"
-      ]
-    }
-  }
-],
+  "spa": {
+    "watermarkTop": "Balance - Relaxation",
+    "watermarkBottom": "Renewal - Healing",
+    "imageUrl": "/images/spa/spa-dome.jpg",
+    "videoUrl": "/videos/spa-intro.mp4",
+    "headline": "A world-class gastronomic journey where nature’s finest ingredients meet culinary craftsmanship.",
+    "link": "https://earthbyulaman.com/"
+  },
   "facilities": [
     {
       "id": 1,

@@ -23,7 +23,7 @@ type PackageDetailModalProps = {
     isOpen: boolean;
     onClose: () => void;
     onBookNowClick: (packageName: string) => void;
-    packages: PackageType[];
+    packages: Package[];
     initialPackageId: number | null;
 };
 
@@ -70,14 +70,14 @@ export default function PackageDetailModal({
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="fixed inset-0 z-[100] bg-black/70 backdrop-blur
+                className="fixed inset-0 z-100 bg-black/70 backdrop-blur
                             flex items-center justify-center"
                 onClick={onClose}
             >
             {/* Tombol Close "X" (Detail 5) */}
             <button
                 onClick={onClose}
-                className="absolute top-6 right-6 text-white/70 hover:text-white z-[120]"
+                className="absolute top-6 right-6 text-white/70 hover:text-white z-120"
                 aria-label="Close package detail modal"
             >
                 <X size={32} />
@@ -97,7 +97,7 @@ export default function PackageDetailModal({
                 <div className="flex h-full">
                     {packages.map((pkg) => (
                     <div 
-                        className="flex-grow-0 flex-shrink-0 basis-full h-full 
+                        className="grow-0 shrink-0 basis-full h-full 
                                 grid grid-cols-1 lg:grid-cols-2" 
                         key={pkg.id}
                     >

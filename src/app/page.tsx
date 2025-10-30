@@ -7,6 +7,8 @@ import IntroSection from "@/components/sections/IntroSection";
 import RoomsSection from "@/components/sections/RoomsSection";
 import ParallaxCtaSection from "@/components/sections/ParallaxCtaSection";
 import PackagesSection from "@/components/sections/PackagesSection";
+import WellnessSection from "@/components/sections/WellnessSection";
+import SpaSection from "@/components/sections/SpaSection";
 // import FacilitiesSection from "@/components/sections/FacilitiesSection";
 // import ExperienceSection from "@/components/sections/ExperienceSection";
 
@@ -29,6 +31,14 @@ export default function Home() {
       
       {/* 5. Packages Section */}
       <PackagesSection />
+
+      {/* 6. Wellness Section */}
+      <WellnessSection />
+
+      {/* 7. Spa Section */}
+      <SpaSection />
+
+
 
     </main>
   );
