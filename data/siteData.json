@@ -121,6 +121,23 @@
     "headline": "A world-class gastronomic journey where nature’s finest ingredients meet culinary craftsmanship.",
     "link": "https://earthbyulaman.com/"
   },
+  "dine": [
+    {
+      "id": 1,
+      "imageUrl": "/images/dine/ulaman-salad.jpg",
+      "alt": "Fresh salad dish at Ulaman"
+    },
+    {
+      "id": 2,
+      "imageUrl": "/images/dine/our-chef-arik.jpg",
+      "alt": "Ulaman's chef preparing a dish"
+    },
+    {
+      "id": 3,
+      "imageUrl": "/images/dine/earth-restaurant.jpg",
+      "alt": "Interior of Ulaman's E.A.R.T.H restaurant"
+    }
+  ],
   "facilities": [
     {
       "id": 1,
