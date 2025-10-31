@@ -1,12 +1,14 @@
 // src/components/sections/GallerySection.tsx
 "use client"
 
-import React, { useState } from 'react'; // Tambah useState
+import React, { useState, useEffect } from 'react'; 
 import { motion, type Variants } from 'framer-motion';
 
 import data from '../../../data/siteData.json';
 import GalleryCard from '@/components/ui/GalleryCard';
 import { SiteData, GalleryImage, GalleryData } from '@/types/siteTypes';
+
+const ITEMS_TO_SHOW = 6; // Kunci: Hanya tampilkan 6 gambar
 
 // Varian untuk membungkus dan mengontrol stagger anak
 const containerVariants: Variants = {
@@ -19,15 +21,16 @@ const containerVariants: Variants = {
 
 // Fungsi untuk menentukan tinggi kartu (untuk efek Masonry)
 const getGridRowSpan = (index: number): string => {
-    // Memberikan span baris yang berbeda untuk menciptakan efek masonry
+    // KOREKSI: Pola 6 elemen yang cocok dengan visual Ulaman
     const patterns = [
-        'row-span-3', // Gambar 1: Sangat Tinggi (Chef)
-        'row-span-2', // Gambar 2: Tinggi (Afternoon Delight)
-        'row-span-2', // Gambar 3: Tinggi (Photoshoot)
-        'row-span-2', // Gambar 4: Tinggi (Yoga)
-        'row-span-3', // Gambar 5: Sangat Tinggi (Healing)
-        'row-span-2', // Gambar 6: Tinggi (Dinner)
+        'row-span-2', // Gambar 1: Sangat Tinggi
+        'row-span-1', // Gambar 2: Tinggi
+        'row-span-2', // Gambar 3: Tinggi
+        'row-span-1', // Gambar 4: Normal
+        'row-span-2', // Gambar 5: Sangat Tinggi
+        'row-span-1', // Gambar 6: Tinggi
     ];
+    // KOREKSI: Gunakan array 'patterns' yang sudah didefinisikan (tanpa dynamicPatterns)
     return patterns[index % patterns.length];
 };
 
@@ -58,14 +61,44 @@ export default function GallerySection() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedImageId, setSelectedImageId] = useState<number | null>(null);
 
+    // State Kunci untuk Auto-Cycling (Melacak indeks awal dari 6 gambar yang ditampilkan)
+    const [startIndex, setStartIndex] = useState(0);
+
     const handleOpenModal = (imageId: number) => {
         setSelectedImageId(imageId);
         setIsModalOpen(true);
     };
 
     // Type Assertion untuk mendapatkan data gallery yang benar
-    const galleryData: GalleryData = (data as SiteData).gallery; // Cast tipe
-    const images: GalleryImage[] = galleryData.images; // Menggunakan properti images
+    const galleryData: GalleryData = (data as SiteData).gallery; 
+    const totalImages = galleryData.images.length;
+
+    // --- LOGIC AUTO-CYCLING ---
+    useEffect(() => {
+        // Fungsi untuk menggeser startIndex
+        const cycleImages = () => {
+            setStartIndex(prevIndex => (prevIndex + ITEMS_TO_SHOW) % totalImages);
+        };
+        
+        // Atur interval 3 detik
+        const intervalId = setInterval(cycleImages, 3000); 
+
+        // Cleanup: Hapus interval saat komponen di-unmount
+        return () => clearInterval(intervalId);
+    }, [totalImages]);
+    // --- END LOGIC AUTO-CYCLING ---
+
+
+    // Filter gambar: Ambil 6 gambar dari startIndex hingga (startIndex + 6)
+    // Gunakan slice dan concat untuk mengatasi wrap-around di akhir array
+    const displayedImages = galleryData.images
+        .slice(startIndex, startIndex + ITEMS_TO_SHOW);
+        
+    // Jika tidak cukup 6 gambar, ambil sisanya dari awal array
+    if (displayedImages.length < ITEMS_TO_SHOW) {
+        const remainingCount = ITEMS_TO_SHOW - displayedImages.length;
+        displayedImages.push(...galleryData.images.slice(0, remainingCount));
+    }
 
     return (
         <section id="gallery-section" className="py-24 lg:py-32 bg-background">
@@ -90,11 +123,11 @@ export default function GallerySection() {
                     whileInView="visible"
                     viewport={{ once: true, amount: 0.1 }}
                 >
-                    {images.map((image, index) => (
+                    {displayedImages.map((image: GalleryImage, index: number) => ( // <-- Aplikasi Tipe
                     <div key={image.id} className={getGridRowSpan(index)}>
                         <GalleryCard 
                             image={image} 
-                            onOpenModal={handleOpenModal} // Meneruskan fungsi pembuka
+                            onOpenModal={handleOpenModal} 
                         />
                     </div>
                     ))}
