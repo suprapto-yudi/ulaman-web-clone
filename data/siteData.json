@@ -329,15 +329,43 @@
   },
   "facilities": [],
   "experiences": [], 
-  
   "gallery": {
-      "headline": "A Snapshot of Ulaman Life",
-      "images": [
-          { "id": 1, "imageUrl": "/images/gallery/gallery-01.jpg", "alt": "Riverside Pool" },
-          { "id": 2, "imageUrl": "/images/gallery/gallery-02.jpg", "alt": "Cocoon Exterior" },
-          { "id": 3, "imageUrl": "/images/gallery/gallery-03.jpg", "alt": "Jungle View" },
-          { "id": 4, "imageUrl": "/images/gallery/gallery-04.jpg", "alt": "Dine Area" },
-          { "id": 5, "imageUrl": "/images/gallery/gallery-05.jpg", "alt": "Spa Dome Interior" }
-      ]
+    "headline": "Discover All Experiences",
+    "cta": {
+      "href": "https://ulamanbali.com/activities",
+      "label": "DISCOVER ALL EXPERIENCES"
+    },
+    "images": [
+      {
+        "id": 1,
+        "src": "/images/gallery/gallery-1.jpg",
+        "alt": "Yoga at Ulaman"
+      },
+      {
+        "id": 2,
+        "src": "/images/gallery/gallery-2.jpg",
+        "alt": "Afternoon Tea"
+      },
+      {
+        "id": 3,
+        "src": "/images/gallery/gallery-3.jpg",
+        "alt": "Sound Healing"
+      },
+      {
+        "id": 4,
+        "src": "/images/gallery/gallery-4.jpg",
+        "alt": "Cooking Class"
+      },
+      {
+        "id": 5,
+        "src": "/images/gallery/gallery-5.jpg",
+        "alt": "Romantic Dinner"
+      },
+      {
+        "id": 6,
+        "src": "/images/gallery/gallery-6.jpg",
+        "alt": "Wedding setup"
+      }
+    ]
   }
 }

@@ -12,6 +12,7 @@ import SpaSection from "@/components/sections/SpaSection";
 import DineSection from "@/components/sections/DineSection";
 import MapSection from "@/components/sections/MapSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
+import GallerySection from "@/components/sections/GallerySection";
 // import FacilitiesSection from "@/components/sections/FacilitiesSection";
 // import ExperienceSection from "@/components/sections/ExperienceSection";
 
@@ -49,6 +50,9 @@ export default function Home() {
 
       {/* 10. Testimonial Section */}
       <TestimonialsSection />
+
+      {/* 11. Gallery Section */}
+      <GallerySection />
 
     </main>
   );

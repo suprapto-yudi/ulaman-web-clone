@@ -131,12 +131,18 @@ export interface TestimonialsData {
 // Tambahkan interface untuk Galeri
 export interface GalleryImage {
     id: number;
-    imageUrl: string;
+    // KUNCI PERBAIKAN: Ganti 'imageUrl' menjadi 'src'
+    src: string; 
     alt: string;
 }
 
 export interface GalleryData {
     headline: string;
+    // KUNCI PERBAIKAN: Tambahkan CTA
+    cta: {
+        href: string;
+        label: string;
+    };
     images: GalleryImage[];
 }
 
