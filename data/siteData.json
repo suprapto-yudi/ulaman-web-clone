@@ -338,33 +338,63 @@
     "images": [
       {
         "id": 1,
-        "src": "/images/gallery/gallery-1.jpg",
-        "alt": "Yoga at Ulaman"
+        "src": "/images/gallery/gallery-1-private-tennis-coach.jpg",
+        "alt": "Private Tennis Coach"
       },
       {
         "id": 2,
-        "src": "/images/gallery/gallery-2.jpg",
-        "alt": "Afternoon Tea"
+        "src": "/images/gallery/gallery-2-romantic-5-star.jpg",
+        "alt": "Romantic 5-Star Culinary Experience by Ulaman's Natural Waterfalls!"
       },
       {
         "id": 3,
-        "src": "/images/gallery/gallery-3.jpg",
-        "alt": "Sound Healing"
+        "src": "/images/gallery/gallery-3-private-yoga-session.jpg",
+        "alt": "Private Yoga Session (Hatha, Yin or Fly High Yoga)"
       },
       {
         "id": 4,
-        "src": "/images/gallery/gallery-4.jpg",
-        "alt": "Cooking Class"
+        "src": "/images/gallery/gallery-4-romantic-bed-decorations.jpg",
+        "alt": "Romantic Bed Decorations"
       },
       {
         "id": 5,
-        "src": "/images/gallery/gallery-5.jpg",
-        "alt": "Romantic Dinner"
+        "src": "/images/gallery/gallery-5-vip-airport-transfers.jpg",
+        "alt": "VIP Airport Transfers via Helicopter"
       },
       {
         "id": 6,
-        "src": "/images/gallery/gallery-6.jpg",
-        "alt": "Wedding setup"
+        "src": "/images/gallery/gallery-6-balloons-sparkles.jpg",
+        "alt": "Balloons and Sparkles"
+      },
+      {
+        "id": 7,
+        "src": "/images/gallery/gallery-7-pool-flower-decorations.jpg",
+        "alt": "Pool Flower Decorations"
+      },
+      {
+        "id": 8,
+        "src": "/images/gallery/gallery-8-pre-wedding-venue.jpg",
+        "alt": "Pre-Wedding Venue"
+      },
+      {
+        "id": 9,
+        "src": "/images/gallery/gallery-9-bathtub-flower-decorations.jpg",
+        "alt": "Bathtub Flower Decorations"
+      },
+      {
+        "id": 10,
+        "src": "/images/gallery/gallery-10-fairytale-tropical-jungle.jpg",
+        "alt": "Fairytale Tropical Jungle Wedding"
+      },
+      {
+        "id": 11,
+        "src": "/images/gallery/gallery-11-melukat-water-blessing.jpg",
+        "alt": "'Melukat' Water Blessing Ceremony"
+      },
+      {
+        "id": 12,
+        "src": "/images/gallery/gallery-12-waterfall-dining.jpg",
+        "alt": "Waterfall Dining"
       }
     ]
   }
