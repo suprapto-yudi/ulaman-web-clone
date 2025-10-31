@@ -8,16 +8,7 @@ import { motion, type Variants } from 'framer-motion';
 
 import data from '../../../data/siteData.json';
 import TestimonialCard from '@/components/ui/TestimonialCard';
-
-// Interface tipe data (kita deklarasikan ulang karena ReviewsSection adalah induk)
-type ReviewType = {
-  id: number;
-  author: string;
-  date: string;
-  title: string;
-  body: string;
-  rating: number;
-};
+import { SiteData, RatingData, ReviewData } from '@/types/siteTypes';
 
 // Varian animasi
 const fadeInUp: Variants = { 
@@ -32,33 +23,28 @@ const fadeInUp: Variants = {
   },
 };
 
-// Interface tipe data RatingType (tetap sama)
-type RatingType = {
-    id: string;
-    name: string;
-    score: string;
-    count: string;
-    stars: number;
-};
-
 // Komponen Rating Widget Mini
-const RatingWidget: React.FC<{ rating: RatingType }> = ({ rating }) => (
+const RatingWidget: React.FC<{ rating: RatingData }> = ({ rating }) => (
     <div className="flex flex-col items-center p-4 border border-primary/20 rounded-lg bg-white shadow-sm">
         <div className="flex items-center space-x-1 mb-2">
             <Star size={16} className="text-primary fill-primary" />
-            <span className="font-sans text-xl font-semibold text-primary">{rating.score}</span>
+            <span className="font-sans text-xl font-semibold text-primary">{rating.rating.toFixed(1)}</span> 
         </div>
-        <p className="font-sans text-xs text-foreground/70 uppercase tracking-widest">{rating.name}</p>
+        <p className="font-sans text-xs text-foreground/70 uppercase tracking-widest">{rating.platform}</p>
         <p className="font-sans text-xs text-foreground/50 mt-1">{rating.count} reviews</p>
     </div>
 );
 
 
 export default function TestimonialsSection() {
-    // KITA ASUMSIKAN data.testimonials sudah ada setelah Langkah 1
-    const { testimonials } = data; 
-    const { ratings, reviews } = testimonials;
-    const reviews = testimonials.reviews as ReviewType[];
+    // KUNCI PERBAIKAN 1: Gunakan Type Assertion Sekali di sini
+    const siteData = data as SiteData;
+    const { testimonials } = siteData; 
+    
+    // KUNCI PERBAIKAN 2: HANYA deklarasikan variabel ratings dan reviews sekali
+    const ratings: RatingData[] = testimonials.ratings; 
+    const reviews: ReviewData[] = testimonials.reviews;
+    //hapus const reviews = testimonials.reviews as ReviewType[];
 
     // Setup Embla Carousel
     const [emblaRef, emblaApi] = useEmblaCarousel({ 
@@ -89,8 +75,8 @@ export default function TestimonialsSection() {
                     
                     {/* KOLOM KIRI: RATING WIDGETS */}
                     <div className="flex flex-col gap-6">
-                        {ratings.map((rating) => (
-                            <RatingWidget key={rating.id} rating={rating} />
+                        {ratings.map((rating, index) => (
+                            <RatingWidget key={rating.platform || index} rating={rating} />
                         ))}
                     </div>
 

@@ -1,19 +1,11 @@
 // src/components/ui/TestimonialCard.tsx
 import HoverLink from './HoverLink';
 import { Star } from 'lucide-react';
-
-// Interface Tipe data Testimonial untuk kartu
-type ReviewType = {
-  id: number;
-  author: string;
-  date: string;
-  title: string;
-  body: string;
-  rating: number;
-};
+// KUNCI PERBAIKAN: Import tipe dari file sentral
+import { ReviewData } from '@/types/siteTypes';
 
 type TestimonialCardProps = {
-  review: ReviewType;
+  review: ReviewData; // Gunakan tipe yang diimpor
 };
 
 // Komponen untuk menampilkan bintang rating
@@ -37,21 +29,26 @@ const StarRating = ({ count }: { count: number }) => {
 
 
 export default function TestimonialCard({ review }: TestimonialCardProps) {
+    // KUNCI PERBAIKAN: Hitung rating jika ada (misal rating 5)
+    // Di JSON kamu tidak ada rating bintang per review, jadi kita asumsikan 5 jika ingin ditampilkan
+    const starCount = 5;
+
   return (
     // Layout slide (wajib ada untuk embla-carousel)
     <div className="flex-grow-0 flex-shrink-0 basis-full pl-4 md:pl-8 lg:pl-16">
       <div className="max-w-4xl pt-4">
         
-        {/* Rating Bintang */}
-        <StarRating count={review.rating} />
+        {/* Rating Bintang (Hanya untuk visual, bisa dihilangkan jika tidak ada data bintang di JSON Review) */}
+        <StarRating count={starCount} />
 
         {/* Judul dan Body Review */}
         <h3 className="font-serif text-3xl md:text-4xl text-foreground mt-4 mb-4">
           {review.title}
         </h3>
         
+        {/* KUNCI PERBAIKAN: Menggunakan review.comment, BUKAN review.body */}
         <p className="font-sans text-lg text-foreground/80 leading-relaxed mb-6">
-          {review.body}
+          {review.comment}
         </p>
 
         {/* Author dan Tanggal */}
@@ -64,7 +61,7 @@ export default function TestimonialCard({ review }: TestimonialCardProps) {
         </div>
 
         {/* Tombol Continue Reading (Detail 10) */}
-        <HoverLink href="#" className="text-primary">
+        <HoverLink href={review.url} className="text-primary">
             Continue Reading
         </HoverLink>
       </div>
