@@ -7,6 +7,7 @@ import { motion, type Variants } from 'framer-motion';
 import data from '../../../data/siteData.json';
 import GalleryCard from '@/components/ui/GalleryCard';
 import { SiteData, GalleryImage, GalleryData } from '@/types/siteTypes';
+import { AnimatePresence } from 'framer-motion';
 
 const ITEMS_TO_SHOW = 6; // Kunci: Hanya tampilkan 6 gambar
 
@@ -23,12 +24,12 @@ const containerVariants: Variants = {
 const getGridRowSpan = (index: number): string => {
     // KOREKSI: Pola 6 elemen yang cocok dengan visual Ulaman
     const patterns = [
-        'row-span-2', // Gambar 1: Sangat Tinggi
-        'row-span-1', // Gambar 2: Tinggi
-        'row-span-2', // Gambar 3: Tinggi
-        'row-span-1', // Gambar 4: Normal
+        'row-span-3', // Gambar 1: Sangat Tinggi
+        'row-span-2', // Gambar 2: Tinggi
+        'row-span-3', // Gambar 3: Tinggi
+        'row-span-3', // Gambar 4: Normal
         'row-span-2', // Gambar 5: Sangat Tinggi
-        'row-span-1', // Gambar 6: Tinggi
+        'row-span-2', // Gambar 6: Tinggi
     ];
     // KOREKSI: Gunakan array 'patterns' yang sudah didefinisikan (tanpa dynamicPatterns)
     return patterns[index % patterns.length];
@@ -64,10 +65,15 @@ export default function GallerySection() {
     // State Kunci untuk Auto-Cycling (Melacak indeks awal dari 6 gambar yang ditampilkan)
     const [startIndex, setStartIndex] = useState(0);
 
-    const handleOpenModal = (imageId: number) => {
+    // KUNCI PERBAIKAN: Tambahkan definisi fungsi di sini
+    const handleOpenModal = (imageId: number) => { 
         setSelectedImageId(imageId);
         setIsModalOpen(true);
     };
+
+    // KUNCI: Kita akan menggunakan state terpisah untuk gambar yang sedang di-render.
+    // Ini membantu memisahkan data yang sedang dihitung dari data yang sedang ditampilkan.
+    const [currentImages, setCurrentImages] = useState<GalleryImage[]>([]);
 
     // Type Assertion untuk mendapatkan data gallery yang benar
     const galleryData: GalleryData = (data as SiteData).gallery; 
@@ -77,7 +83,8 @@ export default function GallerySection() {
     useEffect(() => {
         // Fungsi untuk menggeser startIndex
         const cycleImages = () => {
-            setStartIndex(prevIndex => (prevIndex + ITEMS_TO_SHOW) % totalImages);
+            const newStartIndex = (startIndex + ITEMS_TO_SHOW) % totalImages;
+            setStartIndex(newStartIndex);
         };
         
         // Atur interval 3 detik
@@ -85,20 +92,24 @@ export default function GallerySection() {
 
         // Cleanup: Hapus interval saat komponen di-unmount
         return () => clearInterval(intervalId);
-    }, [totalImages]);
+    }, [startIndex, totalImages]);
+
+    // KUNCI: Hitung dan set currentImages berdasarkan startIndex yang baru
+    useEffect(() => {
+        const calculateDisplayedImages = () => {
+            let displayed = galleryData.images
+                .slice(startIndex, startIndex + ITEMS_TO_SHOW);
+                
+            if (displayed.length < ITEMS_TO_SHOW) {
+                const remainingCount = ITEMS_TO_SHOW - displayed.length;
+                displayed = displayed.concat(galleryData.images.slice(0, remainingCount));
+            }
+            return displayed;
+        };
+
+        setCurrentImages(calculateDisplayedImages());
+    }, [startIndex, totalImages, galleryData.images]);
     // --- END LOGIC AUTO-CYCLING ---
-
-
-    // Filter gambar: Ambil 6 gambar dari startIndex hingga (startIndex + 6)
-    // Gunakan slice dan concat untuk mengatasi wrap-around di akhir array
-    const displayedImages = galleryData.images
-        .slice(startIndex, startIndex + ITEMS_TO_SHOW);
-        
-    // Jika tidak cukup 6 gambar, ambil sisanya dari awal array
-    if (displayedImages.length < ITEMS_TO_SHOW) {
-        const remainingCount = ITEMS_TO_SHOW - displayedImages.length;
-        displayedImages.push(...galleryData.images.slice(0, remainingCount));
-    }
 
     return (
         <section id="gallery-section" className="py-24 lg:py-32 bg-background">
@@ -115,22 +126,39 @@ export default function GallerySection() {
                     {galleryData.headline}
                 </motion.h2>
 
-                {/* MASONRY GRID LAYOUT */}
+                {/* Wrapper MASONRY GRID dengan AnimatePresence */}
                 <motion.div
-                    className="grid grid-cols-2 md:grid-cols-3 gap-4 auto-rows-[10rem] md:auto-rows-[15rem] lg:auto-rows-[18rem]"
+                    className="relative" // Perlu relative untuk AnimatePresence
                     variants={containerVariants}
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, amount: 0.1 }}
                 >
-                    {displayedImages.map((image: GalleryImage, index: number) => ( // <-- Aplikasi Tipe
-                    <div key={image.id} className={getGridRowSpan(index)}>
-                        <GalleryCard 
-                            image={image} 
-                            onOpenModal={handleOpenModal} 
-                        />
-                    </div>
-                    ))}
+                    <AnimatePresence mode="wait"> {/* Mode "wait" memastikan set lama selesai keluar sebelum set baru masuk */}
+                        <motion.div
+                            // KUNCI: Gunakan startIndex sebagai key untuk memaksa React me-mount konten baru
+                            key={startIndex} 
+                            
+                            // Animasi masuk/keluar saat konten berubah
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -20 }}
+                            transition={{ duration: 0.8 }}
+                            
+                            // Kelas Grid Masonry di sini
+                            className="grid grid-cols-2 md:grid-cols-3 gap-4 auto-rows-[10rem] md:auto-rows-[15rem] lg:auto-rows-[18rem]"
+                        >
+                            {/* Menggunakan currentImages yang stabil untuk rendering */}
+                            {currentImages.map((image: GalleryImage, index: number) => (
+                            <div key={image.id} className={getGridRowSpan(index)}>
+                                <GalleryCard 
+                                    image={image} 
+                                    onOpenModal={handleOpenModal} 
+                                />
+                            </div>
+                            ))}
+                        </motion.div>
+                    </AnimatePresence>
                 </motion.div>
                 {/* RENDER MODAL */}
                 <GalleryModal 
