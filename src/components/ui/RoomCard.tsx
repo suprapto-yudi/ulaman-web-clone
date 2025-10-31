@@ -1,18 +1,17 @@
 // src/components/ui/RoomCard.tsx
-
 "use client"
 
 import Image from 'next/image';
-import Link from 'next/link'; 
 import { motion, type Variants } from 'framer-motion'; 
-import HoverLink from '@/components/ui/HoverLink'; 
+// KITA ASUMSIKAN kamu ingin menggunakan Link:
+import Link from 'next/link'; 
+import HoverLink from '@/components/ui/HoverLink';
 
 // KUNCI PERBAIKAN: INTERFACE SINKRON DENGAN JSON (id: number, tanpa price)
 type RoomType = {
   id: number; // HARUS number
   name: string;
   subtitle: string; // HARUS subtitle
-  // price: string; <-- DIHAPUS
   imageUrl: string;
   detailsHref: string; // HARUS detailsHref
 };
@@ -25,23 +24,25 @@ const cardVariants: Variants = {
     y: 0,
     transition: {
       duration: 0.6,
-      ease: 'easeOut',
+      ease: [0.42, 0, 0.58, 1.0],
     },
   },
 };
 
 type RoomCardProps = {
   room: RoomType;
+  onOpenModal: (roomDetails: RoomType) => void; 
 };
 
-export default function RoomCard({ room }: RoomCardProps) {
+export default function RoomCard({ room, onOpenModal }: RoomCardProps) {
   // Pastikan kamu menggunakan room.subtitle dan room.detailsHref di JSX di bawah ini
   return (
     <motion.div 
       className="flex-grow-0 flex-shrink-0 basis-[90%] sm:basis-1/2 lg:basis-[40%] pl-4"
       variants={cardVariants}
+      onClick={() => onOpenModal(room)}
     >
-      <Link href={room.detailsHref} className="group block h-full">
+      <a className="group block h-full cursor-pointer">
         <div className="flex flex-col h-full bg-background">
           
           {/* Gambar Kamar */}
@@ -68,14 +69,15 @@ export default function RoomCard({ room }: RoomCardProps) {
             
             {/* Tombol Discover */}
             <div className="mt-4">
-                <HoverLink href={room.detailsHref}>
+                <span className="font-sans text-sm font-medium text-primary uppercase 
+                             tracking-wider group-hover:text-foreground transition-colors duration-300">
                     Discover
-                </HoverLink>
+                </span>
             </div>
 
           </div>
         </div>
-      </Link>
+      </a>
     </motion.div>
   );
 }

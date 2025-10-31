@@ -1,15 +1,23 @@
 // src/components/sections/RoomsSection.tsx
+"use client" 
 
-"use client" // Perlu "use client" untuk Embla Carousel & Framer Motion
-
-import React, { useCallback } from 'react'
+import React, { useState, useCallback } from 'react';
+import RoomCard from '@/components/ui/RoomCard';
 import { motion, type Variants } from 'framer-motion' 
 import useEmblaCarousel from 'embla-carousel-react'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 
 // KUNCI PERBAIKAN: Path import JSON yang benar
 import data from '../../../data/siteData.json'
-import RoomCard from '@/components/ui/RoomCard' 
+
+// KUNCI PERBAIKAN: Definisikan RoomType di sini agar Typescript tahu apa itu (ts(2304))
+type RoomType = {
+  id: number;
+  name: string;
+  subtitle: string;
+  imageUrl: string;
+  detailsHref: string;
+};
 
 // Varian animasi untuk subheadline
 const fadeInUp: Variants = { 
@@ -19,13 +27,20 @@ const fadeInUp: Variants = {
     y: 0,
     transition: {
       duration: 0.8,
-      ease: 'easeOut',
+      ease: [0.42, 0, 0.58, 1.0],
     },
   },
 }
 
 export default function RoomsSection() {
-  const { rooms } = data 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedRoom, setSelectedRoom] = useState<RoomType | null>(null); 
+  const { rooms } = data;
+
+  const handleOpenModal = (roomDetails: RoomType) => {
+      setSelectedRoom(roomDetails);
+      setIsModalOpen(true);
+  }; 
 
   // Setup Embla Carousel
   const [emblaRef, emblaApi] = useEmblaCarousel({ 
@@ -94,7 +109,10 @@ export default function RoomsSection() {
           >
             <div className="flex">
               {rooms.map((room) => (
-                <RoomCard key={room.id} room={room} /> 
+                <RoomCard 
+                    key={room.id} 
+                    room={room as RoomType}
+                    onOpenModal={handleOpenModal} /> 
               ))}
             </div>
           </motion.div>
