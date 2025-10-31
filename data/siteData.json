@@ -283,5 +283,48 @@
         "top": "25.0%"
       }
     ]
+  },
+  "testimonials": {
+    "headline": "What Our Guests Have To Say About Us",
+    "ratings": [
+      {
+        "platform": "Tripadvisor Reviews",
+        "rating": 4.8,
+        "count": 295,
+        "url": "https://www.tripadvisor.com/Hotel_Review-g608496-d21058098-Reviews-Ulaman_Eco_Luxury_Retreat-Tabanan_Bali.html"
+      },
+      {
+        "platform": "Google Reviews",
+        "rating": 4.7,
+        "count": 742,
+        "url": "https://www.google.com/travel/search?q=ulaman%20bali"
+      }
+    ],
+    "reviews": [
+      {
+        "id": 1,
+        "author": "Alsana Trawally",
+        "date": "June 2024",
+        "title": "\"Best Experience In Bali.\"",
+        "comment": "\"Best experience I had in Bali out of all the resorts I've been to too, customer service was impeccable and the staff were so kind. Mr Komang made sure we had accommodations and did the best of his ability to make sure we had a warming welcoming. It's unbelievable that everything is made of bamboo\"",
+        "url": "https://www.tripadvisor.co.id/ShowUserReviews-g608496-d21058098-r949534794-Ulaman_Eco_Luxury_Retreat-Tabanan_Bali.html"
+      },
+      {
+        "id": 2,
+        "author": "Jane Doe",
+        "date": "May 2024",
+        "title": "\"Absolutely Stunning!\"",
+        "comment": "\"From the moment we arrived, we were treated like royalty. The architecture is breathtaking, and the food at E.A.R.T.H. restaurant was out of this world. We will definitely be back. A true eco-luxury experience.\"",
+        "url": "https://www.tripadvisor.co.id/ShowUserReviews-g608496-d21058098-r949534794-Ulaman_Eco_Luxury_Retreat-Tabanan_Bali.html"
+      },
+      {
+        "id": 3,
+        "author": "John Smith",
+        "date": "April 2024",
+        "title": "\"A Magical Retreat.\"",
+        "comment": "\"The attention to detail is incredible. Every corner of the resort is beautiful. The riverside spa was the most relaxing experience of my life. Highly recommend the Avatar Tree House for a unique stay.\"",
+        "url": "https://www.tripadvisor.co.id/ShowUserReviews-g608496-d21058098-r949534794-Ulaman_Eco_Luxury_Retreat-Tabanan_Bali.html"
+      }
+    ]
   }
 }
