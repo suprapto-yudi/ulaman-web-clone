@@ -2,12 +2,8 @@
 "use client"
 
 import Image from 'next/image';
-import { motion, type Variants } from 'framer-motion';
-import { GalleryImage } from '@/types/siteTypes'; // Import tipe dari file sentral
-
-type GalleryCardProps = {
-    image: GalleryImage;
-};
+import { motion, type Variants } from 'framer-motion'; 
+import { GalleryImage, GalleryCardProps } from '@/types/siteTypes';
 
 // Varian animasi stagger untuk setiap kartu
 const cardVariants: Variants = {
@@ -23,25 +19,27 @@ const cardVariants: Variants = {
     },
 };
 
-export default function GalleryCard({ image }: GalleryCardProps) {
-    // Kita akan menggunakan rasio aspect yang berbeda di CSS untuk membuat efek masonry
+export default function GalleryCard({ image, className, onOpenModal }: GalleryCardProps) {
     return (
-        <motion.div
-            className="w-full relative overflow-hidden rounded-lg group"
+        <motion.button // KUNCI: Menggunakan <button> untuk aksi klik
+            className={`relative w-full h-full overflow-hidden block group focus:ring-2 focus:ring-primary ${className}`}
+            onClick={() => onOpenModal(image.id)} // Panggil modal dengan ID gambar
             variants={cardVariants}
+            aria-label={`Lihat detail galeri: ${image.alt}`}
         >
+            {/* Gambar */}
             <Image
                 src={image.src}
                 alt={image.alt}
-                // Atur fill=true untuk membiarkan CSS parent mengontrol ukuran
                 fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                sizes="(max-width: 768px) 50vw, 33vw"
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
             />
             
-            {/* Overlay untuk teks atau hover effect */}
-            <div className="absolute inset-0 bg-black/10 transition-colors duration-300 group-hover:bg-black/20" />
-            
-        </motion.div>
+            {/* Overlay/Caption (misalnya nama pengalaman) */}
+            <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors flex items-end p-4">
+                <p className="text-white text-sm font-semibold leading-tight">{image.alt}</p>
+            </div>
+        </motion.button>
     );
 }

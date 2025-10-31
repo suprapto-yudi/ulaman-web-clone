@@ -136,22 +136,31 @@ export interface TestimonialsData {
     reviews: ReviewData[];
 }
 
-// Tambahkan interface untuk Galeri
+// I. Interface untuk Galeri
 export interface GalleryImage {
     id: number;
-    // KUNCI PERBAIKAN: Ganti 'imageUrl' menjadi 'src'
-    src: string; 
-    alt: string;
+    src: string; // Menggunakan 'src' sesuai JSON
+    alt: string; // Menggunakan 'alt' sesuai JSON
+    // Tidak perlu linkHref atau actionSlug di sini, cukup ID.
+}
+
+export interface GalleryCta {
+    href: string;
+    label: string;
 }
 
 export interface GalleryData {
     headline: string;
-    // KUNCI PERBAIKAN: Tambahkan CTA
-    cta: {
-        href: string;
-        label: string;
-    };
+    cta: GalleryCta;
     images: GalleryImage[];
+}
+
+// II. Interface untuk Card Galeri (Props yang diterima oleh komponen)
+export interface GalleryCardProps {
+    image: GalleryImage;
+    className?: string;
+    // Tambahkan prop aksi: Klik harus mengembalikan ID gambar yang diklik
+    onOpenModal: (imageId: number) => void; 
 }
 
 // --- Interface Utama yang Mencakup SEMUA Bagian ---

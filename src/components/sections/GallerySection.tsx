@@ -1,12 +1,12 @@
 // src/components/sections/GallerySection.tsx
 "use client"
 
-import React from 'react';
+import React, { useState } from 'react'; // Tambah useState
 import { motion, type Variants } from 'framer-motion';
 
 import data from '../../../data/siteData.json';
 import GalleryCard from '@/components/ui/GalleryCard';
-import { SiteData, GalleryImage } from '@/types/siteTypes';
+import { SiteData, GalleryImage, GalleryData } from '@/types/siteTypes';
 
 // Varian untuk membungkus dan mengontrol stagger anak
 const containerVariants: Variants = {
@@ -21,19 +21,51 @@ const containerVariants: Variants = {
 const getGridRowSpan = (index: number): string => {
     // Memberikan span baris yang berbeda untuk menciptakan efek masonry
     const patterns = [
-        'row-span-2', // Tinggi (2x)
-        'row-span-3', // Sangat Tinggi (3x)
-        'row-span-2', // Tinggi (2x)
-        'row-span-2', // Tinggi (2x)
-        'row-span-1', // Normal (1x)
+        'row-span-3', // Gambar 1: Sangat Tinggi (Chef)
+        'row-span-2', // Gambar 2: Tinggi (Afternoon Delight)
+        'row-span-2', // Gambar 3: Tinggi (Photoshoot)
+        'row-span-2', // Gambar 4: Tinggi (Yoga)
+        'row-span-3', // Gambar 5: Sangat Tinggi (Healing)
+        'row-span-2', // Gambar 6: Tinggi (Dinner)
     ];
     return patterns[index % patterns.length];
 };
 
+// Interface untuk modal props (Mengatasi Error 'any')
+interface GalleryModalProps {
+    imageId: number | null;
+    isOpen: boolean;
+    onClose: () => void;
+}
+
+// ASUMSI: Modal Anda (misalnya GalleryModal)
+const GalleryModal = ({ imageId, isOpen, onClose }: GalleryModalProps) => {
+    // Di sini Anda bisa mengambil data detail dari ID yang diterima
+    if (!isOpen) return null;
+    return (
+        <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
+            <div className="bg-white p-8 max-w-4xl max-h-[90vh] overflow-y-auto relative">
+                <button onClick={onClose} className="absolute top-4 right-4 text-xl">X</button>
+                {/* Tampilkan detail modal berdasarkan imageId */}
+                <h3 className="text-3xl font-serif">Detail Gambar ID: {imageId}</h3>
+            </div>
+        </div>
+    );
+};
+
 export default function GallerySection() {
+    // State untuk Modal
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedImageId, setSelectedImageId] = useState<number | null>(null);
+
+    const handleOpenModal = (imageId: number) => {
+        setSelectedImageId(imageId);
+        setIsModalOpen(true);
+    };
+
     // Type Assertion untuk mendapatkan data gallery yang benar
-    const galleryData = (data as SiteData).gallery;
-    const images: GalleryImage[] = galleryData.images;
+    const galleryData: GalleryData = (data as SiteData).gallery; // Cast tipe
+    const images: GalleryImage[] = galleryData.images; // Menggunakan properti images
 
     return (
         <section id="gallery-section" className="py-24 lg:py-32 bg-background">
@@ -59,12 +91,20 @@ export default function GallerySection() {
                     viewport={{ once: true, amount: 0.1 }}
                 >
                     {images.map((image, index) => (
-                        <div key={image.id} className={getGridRowSpan(index)}>
-                            <GalleryCard image={image} />
-                        </div>
+                    <div key={image.id} className={getGridRowSpan(index)}>
+                        <GalleryCard 
+                            image={image} 
+                            onOpenModal={handleOpenModal} // Meneruskan fungsi pembuka
+                        />
+                    </div>
                     ))}
                 </motion.div>
-                
+                {/* RENDER MODAL */}
+                <GalleryModal 
+                    imageId={selectedImageId} 
+                    isOpen={isModalOpen} 
+                    onClose={() => setIsModalOpen(false)} 
+                />
             </div>
         </section>
     );
