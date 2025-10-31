@@ -4,7 +4,7 @@
 import Image from 'next/image';
 import Link from 'next/link'; 
 import { motion, type Variants } from 'framer-motion'; 
-import HoverLink from '@/components/ui/HoverLink'; 
+// hapus import HoverLink from '@/components/ui/HoverLink'; 
 import { RoomData } from '@/types/siteTypes';
 
 // Varian Animasi untuk Fade In Slide Up
@@ -58,9 +58,10 @@ export default function RoomCard({ room }: RoomCardProps) {
             
             {/* Tombol Discover */}
             <div className="mt-4">
-                <HoverLink href={room.detailsHref}>
-                    Discover
-                </HoverLink>
+                <span className="font-sans text-sm font-medium text-primary uppercase 
+                             tracking-wider group-hover:text-foreground transition-colors duration-300">
+                  Discover
+                </span>
             </div>
 
           </div>

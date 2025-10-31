@@ -77,7 +77,8 @@ export interface PackageData {
   details: PackageDetail;
 }
 
-// === Wellness Data Type ===
+// === Wellness Type BARU ===
+// KUNCI PERBAIKAN: Interface yang sebelumnya hilang
 export interface WellnessData {
   headline: string;
   text: string;
@@ -103,13 +104,12 @@ export interface DineData {
 
 
 // === Testimonials Types ===
-
-// REVISI UNTUK SINKRON DENGAN data.testimonials.ratings di JSON
+// KUNCI PERBAIKAN: Merefleksikan struktur JSON saat ini
 export interface RatingData {
-    platform: string; // Di JSON: "Tripadvisor Reviews"
+    platform: string; 
     rating: number;   // Di JSON: 4.8 (number)
     count: number;    // Di JSON: 295 (number)
-    url: string;      // Di JSON: URL lengkap
+    url: string;      
 }
 
 export interface ReviewData {
@@ -117,10 +117,9 @@ export interface ReviewData {
     author: string;
     date: string;
     title: string;
-    // KUNCI PERBAIKAN: body diganti menjadi comment agar sesuai JSON
+    // KUNCI PERBAIKAN: comment sesuai dengan JSON
     comment: string;  
     url: string;
-    // NOTE: Karena rating bintang review tidak ada di JSON kamu, kita hapus (atau jadikan opsional)
 }
 
 export interface TestimonialsData {
@@ -129,8 +128,7 @@ export interface TestimonialsData {
     reviews: ReviewData[];
 }
 
-// === Gallery Types ===
-
+// Tambahkan interface untuk Galeri
 export interface GalleryImage {
     id: number;
     imageUrl: string;
@@ -149,7 +147,7 @@ export interface SiteData {
   facilities: FacilityData[]; 
   experiences: ExperienceData[]; 
   packages: PackageData[];
-  wellness: WellnessData;
+  wellness: WellnessData; // Fix: Menghilangkan Cannot find name 'WellnessData'
   spa: SpaData;
   dine: DineData[];
   map: MapData;
