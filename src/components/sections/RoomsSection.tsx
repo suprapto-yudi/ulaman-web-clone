@@ -9,9 +9,7 @@ import { ArrowLeft, ArrowRight } from 'lucide-react'
 
 // KUNCI PERBAIKAN: Path import JSON yang benar
 import data from '../../../data/siteData.json'
-// KUNCI UTAMA: Import tipe dari file sentral
-// NOTE: Kita hanya perlu RoomData dan SiteData, modal logic sudah dihapus.
-import { SiteData, RoomData } from '@/types/siteTypes'; 
+import { RoomType } from '@/types/siteTypes';
 
 // Varian animasi untuk subheadline
 const fadeInUp: Variants = { 
@@ -21,25 +19,47 @@ const fadeInUp: Variants = {
     y: 0,
     transition: {
       duration: 0.8,
-      ease: [0.42, 0, 0.58, 1.0], // Fix Framer Motion Easing
+      ease: 'easeOut',
     },
   },
 }
 
+// Interface untuk modal props (mengatasi error any)
+interface RoomModalProps {
+    room: RoomType | null;
+    isOpen: boolean;
+    onClose: () => void;
+}
+
+// ASUMSI: Anda akan membuat komponen ini. Ini adalah modal yang akan muncul.
+const RoomModal = ({ room, isOpen, onClose }: RoomModalProps) => {
+    if (!isOpen || !room) return null;
+    return (
+        <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
+            <div className="bg-white p-8 max-w-4xl max-h-[90vh] overflow-y-auto relative">
+                <button onClick={onClose} className="absolute top-4 right-4 text-xl">X</button>
+                {/* Konten modal dari room.name, room.subtitle, dll. */}
+                <h3 className="text-3xl font-serif">{room.name}</h3>
+                <p>{room.subtitle}</p>
+                {/* ... Render detail seperti di screenshot yang Anda lampirkan ... */}
+            </div>
+        </div>
+    );
+};
+
+
 export default function RoomsSection() {
- 
-  // KUNCI PERBAIKAN UTAMA: Hapus semua state dan handler yang tidak digunakan
-  // const [isModalOpen, setIsModalOpen] = useState(false); // Hapus
-  // const [selectedRoom, setSelectedRoom] = useState<RoomType | null>(null); // Hapus
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  // State untuk menyimpan data ruangan yang sedang dilihat di modal
+  const [selectedRoom, setSelectedRoom] = useState<RoomType | null>(null); 
+  // Cast data.rooms ke RoomType[] agar TypeScript tidak complain
+  const rooms: RoomType[] = data.rooms as RoomType[]; 
 
-  // Type Assertion untuk mendapatkan data rooms yang benar
-  const rooms = (data as SiteData).rooms as RoomData[];
-
-  // KUNCI PERBAIKAN: Hapus fungsi handleOpenModal yang tidak digunakan
-  // const handleOpenModal = (roomDetails: RoomType) => {
-  //     setSelectedRoom(roomDetails);
-  //     setIsModalOpen(true);
-  // }; 
+  // Fungsi yang dipanggil oleh RoomCard untuk menampilkan modal
+  const handleOpenModal = (roomDetails: RoomType) => {
+      setSelectedRoom(roomDetails);
+      setIsModalOpen(true);
+  }; 
 
   // Setup Embla Carousel
   const [emblaRef, emblaApi] = useEmblaCarousel({ 
@@ -48,14 +68,14 @@ export default function RoomsSection() {
     watchResize: true, 
   })
 
-  // Fungsi untuk tombol navigasi
+  // Fungsi untuk tombol navigasi (useCallback sudah benar)
   const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi])
   const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi])
 
   return (
     // Kita kasih ID agar bisa di-link jika perlu
     <section id="rooms-section" className="py-24 lg:py-32 overflow-hidden bg-background">
-        <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
  
         {/* 1. Subheadline */}
         <motion.h2
@@ -107,13 +127,24 @@ export default function RoomsSection() {
             transition={{ delay: 0.2 }}
           >
               <div className="flex">
-                {rooms.map((room) => (
-                <RoomCard key={room.id} room={room} /> 
+              {rooms.map((room) => (
+                <RoomCard 
+                    key={room.id} 
+                    room={room} 
+                    // Meneruskan fungsi pembuka modal
+                    onOpenModal={handleOpenModal} 
+                /> 
               ))}
               </div>
           </motion.div>
         </div>
       </div>
+      {/* RENDER MODAL DI SINI (Terlihat di client-side) */}
+      <RoomModal 
+        room={selectedRoom} 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+      />
     </section>
   )
 }

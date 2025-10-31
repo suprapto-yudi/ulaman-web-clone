@@ -42,6 +42,14 @@ export interface RoomData {
   detailsHref: string;
 }
 
+export interface RoomType { // <-- HARUS diekspor!
+    id: number;
+    name: string;
+    subtitle: string;
+    imageUrl: string;
+    detailsHref: string;
+}
+
 export interface ExperienceData {
   id: number;
   name: string;

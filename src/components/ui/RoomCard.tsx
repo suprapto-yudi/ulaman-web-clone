@@ -2,10 +2,10 @@
 "use client"
 
 import Image from 'next/image';
-import Link from 'next/link'; 
 import { motion, type Variants } from 'framer-motion'; 
-// hapus import HoverLink from '@/components/ui/HoverLink'; 
-import { RoomData } from '@/types/siteTypes';
+import React from 'react';
+// Import tipe data RoomType dari file tipe Anda
+import { RoomType } from '@/types/siteTypes';
 
 // Varian Animasi untuk Fade In Slide Up
 const cardVariants: Variants = { 
@@ -15,23 +15,34 @@ const cardVariants: Variants = {
     y: 0,
     transition: {
       duration: 0.6,
-      ease: [0.42, 0, 0.58, 1.0],
+      ease: 'easeOut',
     },
   },
 };
 
+// Kunci: Tambahkan prop untuk fungsi modal
 type RoomCardProps = {
-  room: RoomData;
+  room: RoomType;
+  onOpenModal: (roomDetails: RoomType) => void; // Fungsi callback untuk membuka modal
 };
 
-export default function RoomCard({ room }: RoomCardProps) {
+export default function RoomCard({ room, onOpenModal }: RoomCardProps) {
   // Pastikan kamu menggunakan room.subtitle dan room.detailsHref di JSX di bawah ini
+  // Semua fungsionalitas klik dipindahkan ke elemen terluar
   return (
     <motion.div 
       className="flex-grow-0 flex-shrink-0 basis-[90%] sm:basis-1/2 lg:basis-[40%] pl-4"
       variants={cardVariants}
     >
-      <Link href={room.detailsHref} className="group block h-full">
+      {/* KUNCI: Mengganti <Link> dengan <div> atau <button> atau <a> (tanpa href) 
+        dan menambahkan onClick untuk memicu modal.
+      */}
+      <a 
+        className="group block h-full cursor-pointer" 
+        onClick={() => onOpenModal(room)} // Memicu modal
+        role="button" // Memberi peran tombol untuk aksesibilitas
+        aria-label={`Open details for ${room.name}`}
+      >
         <div className="flex flex-col h-full bg-background">
           
           {/* Gambar Kamar */}
@@ -53,20 +64,21 @@ export default function RoomCard({ room }: RoomCardProps) {
             </h3>
             
             <p className="font-sans text-sm text-foreground/70 mt-1 mb-2 uppercase tracking-wider">
-              {room.subtitle} {/* Menggunakan subtitle */}
+              {room.subtitle}
             </p>
             
-            {/* Tombol Discover */}
+            {/* Tombol Discover (Hanya Styling) */}
             <div className="mt-4">
-                <span className="font-sans text-sm font-medium text-primary uppercase 
+              {/* Ini sekarang hanyalah <span> yang di-style, BUKAN tautan bersarang */}
+              <span className="font-sans text-sm font-medium text-primary uppercase 
                              tracking-wider group-hover:text-foreground transition-colors duration-300">
-                  Discover
-                </span>
+                Discover
+              </span>
             </div>
 
           </div>
         </div>
-      </Link>
+      </a> 
     </motion.div>
   );
 }
