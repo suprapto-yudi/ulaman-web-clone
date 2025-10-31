@@ -326,5 +326,18 @@
         "url": "https://www.tripadvisor.co.id/ShowUserReviews-g608496-d21058098-r949534794-Ulaman_Eco_Luxury_Retreat-Tabanan_Bali.html"
       }
     ]
+  },
+  "facilities": [],
+  "experiences": [], 
+  
+  "gallery": {
+      "headline": "A Snapshot of Ulaman Life",
+      "images": [
+          { "id": 1, "imageUrl": "/images/gallery/gallery-01.jpg", "alt": "Riverside Pool" },
+          { "id": 2, "imageUrl": "/images/gallery/gallery-02.jpg", "alt": "Cocoon Exterior" },
+          { "id": 3, "imageUrl": "/images/gallery/gallery-03.jpg", "alt": "Jungle View" },
+          { "id": 4, "imageUrl": "/images/gallery/gallery-04.jpg", "alt": "Dine Area" },
+          { "id": 5, "imageUrl": "/images/gallery/gallery-05.jpg", "alt": "Spa Dome Interior" }
+      ]
   }
 }

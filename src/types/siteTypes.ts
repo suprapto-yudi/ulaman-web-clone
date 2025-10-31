@@ -3,11 +3,10 @@
 import React from 'react';
 
 // === Hotspots/Map Types ===
-
 export interface HotspotData {
   id: number;
   name: string;
-  iconName: string; // Nama ikon Lucide-react
+  iconName: string;
   left: string; 
   top: string;
 }
@@ -18,14 +17,12 @@ export interface MapData {
   hotspots: HotspotData[];
 }
 
-// Interface untuk props visual Hotspot (digunakan di MapHotspot.tsx)
 export interface HotspotProps {
   name: string;
   icon: React.ReactNode; 
   top: string;
   left: string;
 }
-
 
 // === Section Data Types ===
 
@@ -45,7 +42,6 @@ export interface RoomData {
   detailsHref: string;
 }
 
-// Data untuk Experience Card (Spa, Dine, Events, yang menggunakan layout grid)
 export interface ExperienceData {
   id: number;
   name: string;
@@ -54,7 +50,6 @@ export interface ExperienceData {
   linkHref: string;
 }
 
-// Data untuk Facilities (Icon + Teks)
 export interface FacilityData {
     id: number;
     iconName: string;
@@ -82,6 +77,12 @@ export interface PackageData {
   details: PackageDetail;
 }
 
+// === Wellness Data Type ===
+export interface WellnessData {
+  headline: string;
+  text: string;
+  link: string;
+}
 
 // === Spa & Dine Types ===
 
@@ -103,12 +104,12 @@ export interface DineData {
 
 // === Testimonials Types ===
 
+// REVISI UNTUK SINKRON DENGAN data.testimonials.ratings di JSON
 export interface RatingData {
-    id: string; // tripadvisor, google
-    name: string;
-    score: string;
-    count: string;
-    stars: number;
+    platform: string; // Di JSON: "Tripadvisor Reviews"
+    rating: number;   // Di JSON: 4.8 (number)
+    count: number;    // Di JSON: 295 (number)
+    url: string;      // Di JSON: URL lengkap
 }
 
 export interface ReviewData {
@@ -116,8 +117,10 @@ export interface ReviewData {
     author: string;
     date: string;
     title: string;
-    body: string;
-    rating: number;
+    // KUNCI PERBAIKAN: body diganti menjadi comment agar sesuai JSON
+    comment: string;  
+    url: string;
+    // NOTE: Karena rating bintang review tidak ada di JSON kamu, kita hapus (atau jadikan opsional)
 }
 
 export interface TestimonialsData {
@@ -126,18 +129,30 @@ export interface TestimonialsData {
     reviews: ReviewData[];
 }
 
+// === Gallery Types ===
+
+export interface GalleryImage {
+    id: number;
+    imageUrl: string;
+    alt: string;
+}
+
+export interface GalleryData {
+    headline: string;
+    images: GalleryImage[];
+}
 
 // --- Interface Utama yang Mencakup SEMUA Bagian ---
-// Inilah yang HARUS diimpor sebagai tipe untuk data/siteData.json
 export interface SiteData {
   intro: IntroData;
   rooms: RoomData[];
-  facilities: FacilityData[]; // Tambahan facilities
-  experiences: ExperienceData[]; // Tambahan experiences
+  facilities: FacilityData[]; 
+  experiences: ExperienceData[]; 
   packages: PackageData[];
+  wellness: WellnessData;
   spa: SpaData;
   dine: DineData[];
   map: MapData;
-  testimonials: TestimonialsData; // Tambahan testimonials
-  // Tidak ada 'wellness' karena kita pakai 'spa' dan 'experiences'
+  testimonials: TestimonialsData;
+  gallery: GalleryData;
 }
