@@ -3,31 +3,30 @@
 import Button from '@/components/ui/Button'; 
 import React from 'react';
 
+// Asumsi: Komponen Button Anda sudah di-handle oleh Next/Link di dalamnya
 type StayWithUsButtonProps = {
-  // KUNCI: Tambahkan prop isScrolled
   isScrolled: boolean;
-  // KUNCI: Tambahkan prop onClick (opsional, dipakai di mobile menu)
   onClick?: () => void;
-  // KUNCI PERBAIKAN: Tambahkan prop className opsional
-  className?: string;
+  className?: string; // Prop opsional untuk styling tambahan
 };
 
 export default function StayWithUsButton({ isScrolled, onClick, className }: StayWithUsButtonProps) {
 
-  // Logika style kondisional (sama seperti di Navbar)
+  // Kunci: Style yang diterapkan saat awal (transparan) atau setelah di-scroll (solid/putih)
   const dynamicClassName = isScrolled 
-    ? 'border-primary text-primary hover:bg-primary hover:text-white' 
-    : 'border-white text-white hover:bg-primary hover:text-white';
+    ? 'border-primary text-primary bg-transparent hover:bg-primary hover:text-white' // Tombol Emas saat Scroll (Di web ori, tombol ini biasanya berubah menjadi solid emas)
+    : 'border-white text-white bg-transparent hover:bg-white hover:text-primary'; // Tombol Putih Transparan di Hero
 
-  // Gabungkan dynamic className dengan className yang datang dari parent (Mobile Menu)
+  // Gabungkan styling dinamis dan styling eksternal (className)
   const finalClassName = `${dynamicClassName} ${className || ''}`;
-  
+
   return (
     <Button
       href="/booking"
-      variant="outline"
-      className={dynamicClassName}
-      onClick={onClick} // Pasang onClick untuk mobile menu
+      variant="outline" // Selalu outline, tetapi warna border/text-nya yang berubah
+      // KOREKSI: Gunakan finalClassName agar styling dari parent (jika ada) ikut diterapkan
+      className={finalClassName} 
+      onClick={onClick} 
     >
       Stay With Us
     </Button>

@@ -1,13 +1,12 @@
 // src/components/sections/GallerySection.tsx
 "use client"
 
-import React, { useState, useEffect } from 'react'; 
-import { motion, type Variants } from 'framer-motion';
+import React, { useState, useEffect, useMemo } from 'react'; // <-- Tambah useMemo
+import { motion, type Variants, AnimatePresence } from 'framer-motion';
 
 import data from '../../../data/siteData.json';
 import GalleryCard from '@/components/ui/GalleryCard';
 import { SiteData, GalleryImage, GalleryData } from '@/types/siteTypes';
-import { AnimatePresence } from 'framer-motion';
 
 const ITEMS_TO_SHOW = 6; // Kunci: Hanya tampilkan 6 gambar
 
@@ -71,44 +70,32 @@ export default function GallerySection() {
         setIsModalOpen(true);
     };
 
-    // KUNCI: Kita akan menggunakan state terpisah untuk gambar yang sedang di-render.
-    // Ini membantu memisahkan data yang sedang dihitung dari data yang sedang ditampilkan.
-    const [currentImages, setCurrentImages] = useState<GalleryImage[]>([]);
-
-    // Type Assertion untuk mendapatkan data gallery yang benar
     const galleryData: GalleryData = (data as SiteData).gallery; 
     const totalImages = galleryData.images.length;
+    const allImages = galleryData.images; // Alias untuk data statis
 
-    // --- LOGIC AUTO-CYCLING ---
+    // --- LOGIC AUTO-CYCLING (Interval) ---
     useEffect(() => {
-        // Fungsi untuk menggeser startIndex
         const cycleImages = () => {
-            const newStartIndex = (startIndex + ITEMS_TO_SHOW) % totalImages;
-            setStartIndex(newStartIndex);
+            setStartIndex(prevIndex => (prevIndex + ITEMS_TO_SHOW) % totalImages);
         };
         
-        // Atur interval 3 detik
         const intervalId = setInterval(cycleImages, 3000); 
-
-        // Cleanup: Hapus interval saat komponen di-unmount
         return () => clearInterval(intervalId);
-    }, [startIndex, totalImages]);
+    }, [totalImages]); // Dependency diatur ke totalImages saja
 
-    // KUNCI: Hitung dan set currentImages berdasarkan startIndex yang baru
-    useEffect(() => {
-        const calculateDisplayedImages = () => {
-            let displayed = galleryData.images
-                .slice(startIndex, startIndex + ITEMS_TO_SHOW);
-                
-            if (displayed.length < ITEMS_TO_SHOW) {
-                const remainingCount = ITEMS_TO_SHOW - displayed.length;
-                displayed = displayed.concat(galleryData.images.slice(0, remainingCount));
-            }
-            return displayed;
-        };
+    // --- LOGIC CALCULATE IMAGES (Menggunakan useMemo untuk stabilisasi) ---
+    // KUNCI: Hitung array yang ditampilkan setiap kali startIndex berubah.
+    const currentImages = useMemo(() => {
+        let displayed = allImages.slice(startIndex, startIndex + ITEMS_TO_SHOW);
+            
+        if (displayed.length < ITEMS_TO_SHOW) {
+            const remainingCount = ITEMS_TO_SHOW - displayed.length;
+            displayed = displayed.concat(allImages.slice(0, remainingCount));
+        }
+        return displayed;
+    }, [startIndex, totalImages, allImages]); // allImages adalah data statis
 
-        setCurrentImages(calculateDisplayedImages());
-    }, [startIndex, totalImages, galleryData.images]);
     // --- END LOGIC AUTO-CYCLING ---
 
     return (
@@ -148,7 +135,7 @@ export default function GallerySection() {
                             // Kelas Grid Masonry di sini
                             className="grid grid-cols-2 md:grid-cols-3 gap-4 auto-rows-[10rem] md:auto-rows-[15rem] lg:auto-rows-[18rem]"
                         >
-                            {/* Menggunakan currentImages yang stabil untuk rendering */}
+                            {/* Menggunakan currentImages yang stabil dari useMemo */}
                             {currentImages.map((image: GalleryImage, index: number) => (
                             <div key={image.id} className={getGridRowSpan(index)}>
                                 <GalleryCard 

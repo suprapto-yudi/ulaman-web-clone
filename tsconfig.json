@@ -1,3 +1,4 @@
+// tsconfig.json (Revisi Cleanup dan Fix 'estree')
 {
   "compilerOptions": {
     "target": "ES2017",
@@ -23,6 +24,7 @@
       }
     ],
     "paths": {
+      // PATH ALIAS sudah benar, mengarah ke src/*
       "@/*": [
         "./src/*"
       ]
@@ -32,13 +34,15 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
+    // Hanya sisakan satu entri untuk Next.js
     ".next/types/**/*.ts",
-    ".next/dev/types/**/*.ts",
-    "**/*.mts",
-    ".next\\dev/types/**/*.ts",
-    ".next\\dev/types/**/*.ts"
+    ".next/dev/types/**/*.ts"
   ],
+  // Tambahkan 'estree' ke exclude untuk mengatasi error estree
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "**/*.js", // Exclude file .js yang tidak perlu di-type check
+    "**/*.mjs",
+    "estree"
   ]
 }

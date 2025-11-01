@@ -1,0 +1,144 @@
+/* src/styles/globals.css */
+
+/* --- 1. BASE IMPORTS TAILWIND --- */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* --- 2. FONT DEFINITIONS (@font-face) --- */
+
+/* Font Americana (Serif yang elegan - harus sesuai dengan file Anda) */
+@font-face {
+  font-family: 'Americana';
+  src: url('/fonts/Americana.woff2') format('woff2'),
+       url('/fonts/Americana.woff') format('woff');
+  font-weight: 400; /* Regular */
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Font Basis Grotesque Pro (Sans-serif modern/clean - Anda sebutkan di file commit) */
+@font-face {
+  font-family: 'Basis Grotesque Pro';
+  src: url('/fonts/BasisGrotesquePro-Light.woff2') format('woff2');
+  font-weight: 300; /* Light */
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Basis Grotesque Pro';
+  src: url('/fonts/BasisGrotesquePro-Regular.woff2') format('woff2');
+  font-weight: 400; /* Regular */
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/* --- 3. BASE STYLING (HTML & BODY) --- */
+
+/* Mengatur Base Font dan warna latar belakang utama (Cream Ulaman) */
+body {
+  /* Default body font family (Basis Grotesque Pro) */
+  font-family: 'Basis Grotesque Pro', sans-serif; 
+  /* Menggunakan warna background kustom Anda */
+  @apply bg-background text-foreground; 
+  /* Memastikan transisi scroll halus untuk Navbar */
+  scroll-behavior: smooth; 
+}
+
+/* Mengatur ukuran heading dengan font Americana */
+h1, h2, h3, h4, h5, h6 {
+  /* Font Family Serif untuk judul */
+  font-family: 'Americana', serif; 
+  /* Menerapkan warna utama (Gold) secara default untuk semua heading */
+  @apply text-primary; 
+}
+
+
+/* --- 4. OPTIMASI NEXT.JS IMAGE WRAPPER --- */
+
+/* Fix untuk Next.js Image fill/object-cover agar tidak ada flicker/spacing */
+.next-image-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.next-image-container img {
+  object-fit: cover;
+}
+
+
+/* src/styles/globals.css */
+
+/* --- 1. BASE IMPORTS TAILWIND --- */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* --- 2. FONT DEFINITIONS (@font-face) --- */
+
+/* Font Americana (Serif yang elegan - harus sesuai dengan file Anda) */
+@font-face {
+  font-family: 'Americana';
+  src: url('/fonts/Americana.woff2') format('woff2'),
+       url('/fonts/Americana.woff') format('woff');
+  font-weight: 400; /* Regular */
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Font Basis Grotesque Pro (Sans-serif modern/clean - Anda sebutkan di file commit) */
+@font-face {
+  font-family: 'Basis Grotesque Pro';
+  src: url('/fonts/BasisGrotesquePro-Light.woff2') format('woff2');
+  font-weight: 300; /* Light */
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Basis Grotesque Pro';
+  src: url('/fonts/BasisGrotesquePro-Regular.woff2') format('woff2');
+  font-weight: 400; /* Regular */
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/* --- 3. BASE STYLING (HTML & BODY) --- */
+
+/* Mengatur Base Font dan warna latar belakang utama (Cream Ulaman) */
+body {
+  /* Default body font family (Basis Grotesque Pro) */
+  font-family: 'Basis Grotesque Pro', sans-serif; 
+  /* Menggunakan warna background kustom Anda */
+  @apply bg-background text-foreground; 
+  /* Memastikan transisi scroll halus untuk Navbar */
+  scroll-behavior: smooth; 
+}
+
+/* Mengatur ukuran heading dengan font Americana */
+h1, h2, h3, h4, h5, h6 {
+  /* Font Family Serif untuk judul */
+  font-family: 'Americana', serif; 
+  /* Menerapkan warna utama (Gold) secara default untuk semua heading */
+  @apply text-primary; 
+}
+
+
+/* --- 4. OPTIMASI NEXT.JS IMAGE WRAPPER --- */
+
+/* Fix untuk Next.js Image fill/object-cover agar tidak ada flicker/spacing */
+.next-image-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.next-image-container img {
+  object-fit: cover;
+}
+
+
